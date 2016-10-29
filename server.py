@@ -92,19 +92,19 @@ def submit_register():
         'individ_id' : query.id,
         'phone' : phone,
         })
-        return redirect('/'+ radio + '/' + str(query.id)))
-    elif radio == 'parent':
+        return redirect('/'+ radio + '/' + str(query.id))
+        elif radio == 'parent':
         db.insert('phonenums',{
         'individ_id' : query.id,
         'phone' : phone,
         })
-        return redirect('/'+ radio + '/' + str(query.id)))
-    elif radio == 'chaperone':
+        return redirect('/'+ radio + '/' + str(query.id))
+        elif radio == 'chaperone':
         db.insert('phonenums',{
         'individ_id' : query.id,
         'phone' : phone,
         })
-        return redirect('/'+ radio + '/' + str(query.id)))
+        return redirect('/'+ radio + '/' + str(query.id))
 
 
 @app.route('/logout')
