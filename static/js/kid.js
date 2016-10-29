@@ -1,11 +1,13 @@
 $(document).ready(function(){
 
+alert("kid.js")
+
 var lat,lon
 var address
 var travelTime
 var kidsID = 1
 var kidsName = "Jimmy Neutron"
-var destination 
+var destination
 
 function do_something(a,b) {
 	alert(a,b)
@@ -25,7 +27,7 @@ function do_something(a,b) {
    function getTravelTime() {
    	url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" +lat+ "," + lon + "&destinations=" + destination;
    	$.getJSON(url, function(data) {
-		travelTime = data.rows[0].elements[0].duration.text 
+		travelTime = data.rows[0].elements[0].duration.text
 		console.log(travelTime)
 		$('.travTime').text('Travel time is ' + travelTime)
    })
@@ -83,7 +85,6 @@ $('.btn-success').on('click', function(){
 	destination= document.getElementById('destInput').value
 	getIp()
 })
-  
+
 
 })
-
