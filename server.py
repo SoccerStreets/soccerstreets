@@ -52,8 +52,10 @@ def log_out():
 
 @app.route('/register')
 def render_register():
+    query = db.query('Select * from stations').namedresult();
     return render_template(
-        'register.html'
+        'register.html',
+        query = query,
     )
 
 @app.route('/submit_register', methods=['POST'])
@@ -61,7 +63,7 @@ def submit_register():
     fname = request.form.get('fname');
     lname = request.form.get('lname');
     phone = request.form.get('phone');
-    station = request.form.get('station');
+    station = request.form.get('station_id');
     breeze = request.form.get('breeze');
     # address = request.form.get('address');
     uname = request.form.get('uname');
@@ -74,11 +76,12 @@ def submit_register():
     'pws' : pws,
     'type' : radio,
     })
-    query = db.query("Select id from individuals where uname = $1",uname);
+    query = db.query("Select id from individuals where uname = $1",uname).namedresult()[0];
     if radio == 'kid':
         db.insert('kids_breeze',{
         'kid_id' : query.id,
         'breeze' : breeze,
+        'station_id' : station,
         })
         db.insert('kids_parents',{
         'kid_id' : query.id,
