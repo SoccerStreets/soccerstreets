@@ -18,32 +18,23 @@ db = pg.DB(
 
 @app.route('/')
 def render_homepage():
-    loggedin = False
-    try:
-        session['username']
-        loggedin = True
-    except:
-        loggedin = False
-
     return render_template(
-        'login.html',
-        title="SoccerStreets",
-        loggedin = loggedin
-    )
+        'login.html'
+            )
 
 @app.route('/submit_login', methods=['POST'])
 def submit_login():
-    username = request.form.get('username')
-    password = request.form.get('password')
-    results = db.query("select * from users where username = $1", username).namedresult()
+    uname = request.form.get('uname')
+    pws = request.form.get('pwd')
+    results = db.query("select * from individuals where uname = $1", uname).namedresult()
     if len(results) > 0:
         user = results[0]
-        if user.password == password:
+        if user.pws == pws:
             session['id'] = user.id
             flash("Successfully Logged In")
-            return redirect('/')
-        else:
-            return redirect('/')
+            print session['id']
+        return render_template(
+        'register.html')
     else:
         return redirect('/')
 
@@ -70,14 +61,14 @@ def render_register():
 #         )
 
 
-@app.route('/submit_register')
+@app.route('/submit_register', methods=['POST'])
 def submit_register():
     fname = request.form.get('fname');
     lname = request.form.get('lname');
     phone = request.form.get('phone');
     station = request.form.get('station');
     breeze = request.form.get('breeze');
-    address = request.form.get('address');
+    # address = request.form.get('address');
     uname = request.form.get('uname');
     pws = request.form.get('pws');
     radio = request.form.get('optradio');
@@ -86,16 +77,36 @@ def submit_register():
     'lastname' : lname,
     'firstname' : fname,
     'uname' : uname,
-    'pws' : pws
-
+    'pws' : pws,
     })
     query = db.query("Select id from individuals where uname = $1",uname).namedresult()[0];
     if radio == 'kid':
         db.insert('kids_breeze',{
         'kid_id' : query.id,
-        'breeze' : breeze
+        'breeze' : breeze,
         })
-    else if radio == ''
+        db.insert('kids_parents',{
+        'kid_id' : query.id,
+        'parent_id' : parentid,
+        })
+        db.insert('phonenums',{
+        'individ_id' : query.id,
+        'phone' : phone,
+        })
+    elif radio == 'parent':
+        db.insert('phonenums',{
+        'individ_id' : query.id,
+        'phone' : phone,
+        })
+    elif radio == 'chaperone':
+        db.insert('phonenums',{
+        'individ_id' : query.id,
+        'phone' : phone,
+        })
+    return redirect('/')
+
+
+
 
 
 

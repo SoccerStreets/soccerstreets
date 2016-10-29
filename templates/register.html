@@ -11,7 +11,6 @@
   </head>
 
 
-
   <body>
 
     <div class="header">
@@ -19,12 +18,12 @@
     </div>
 
     <div class="container-fluid">
-      <form action="action_page.php">
+      <form action="/submit_register" method="POST">
 
         <label><b>I am a: </b></label>
 
         <label class="radio-inline">
-          <input type="radio" name="optradio" value="chaperone">Chaperone
+          <input type="radio" id="ChaperoneRadio" name="optradio" value="chaperone">Chaperone
         </label>
 
         <label class="radio-inline">
@@ -46,19 +45,21 @@
           <input type="text" placeholder="Phone Number" name="phone" required>
 
           <!-- <label><b>Marta Station</b></label> -->
-          <input type="text" placeholder="Nearest Marta Station" name="station" required>
+          <input class ="Station" type="text" placeholder="Nearest Marta Station" name="station" required>
 
           <!-- <label class="Breeze"><b>Breeze card number</b></label> -->
           <input class="Breeze" type="text" placeholder="Breeze Card Number" name="breeze" required>
 
+          <input class="parentid" type="text" placeholder="Parent's ID (Your parent's received a text when they signed up)" name="parentid" required>
+
           <!-- <label><b>Address</b></label> -->
-          <input type="text" placeholder="Address" name="address" required>
+          <!-- <input type="text" placeholder="Address" name="address" required> -->
 
           <!-- <label><b>Username</b></label> -->
           <input type="text" placeholder="Username" name="uname" required>
 
           <!-- <label><b>Password</b></label> -->
-          <input type="password" placeholder="Password" name="psw" required>
+          <input type="password" placeholder="Password" name="pws" required>
 
           <button type="submit">Register</button>
         </div>
@@ -72,5 +73,5 @@
 
   </body>
   <script src="static/js/jquery-1.12.0.js"></script>
-  <script type ='text/javascript' src ='static/js/soccerstreets.js'></script>
+  <script type ="text/javascript" src ="static/js/soccerstreets.js"></script>
 </html>
