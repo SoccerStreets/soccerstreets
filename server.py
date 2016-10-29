@@ -4,6 +4,7 @@ import pg
 import time
 from dotenv import load_dotenv, find_dotenv
 import os
+import requests
 
 load_dotenv(find_dotenv())
 tmp_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
@@ -106,23 +107,32 @@ def logout():
     flash("Successfully Logged Out")
     return redirect('/')
 
-@app.route('/checkin', methods=['POST'])
+@app.route('/checkin', methods=['POST', 'GET'])
 def checkin():
     kid_id = request.form.get('kid_id');
     timestamp = time.time();
-    origin =request.form.get('origin');
-    destination = request.form.get('destination');
-    query = db.insert('chekins',{
-    'timestamp' : timestamp,
-    'kid_id' : kid_id,
-    'chaparone_id' : session[id],
-    'origin_id' : origin,
-    'dest_id' : destination
+    origin_id =request.form.get('origin_id');
+    if origin_id != 2:
+        destination_id = 2
+    # print "in checkin route"
+    # kid_id = 8
+    # timestamp = time.time();
+    # origin_id = 1
+    # destination_id = 2
+    # chaperone_id = 7
+    r = requests.post('https://intense-shore-33606.herokuapp.com/api/v1/checkins', data={'participant_id':kid_id, 'timestamp': timestamp, 'chaperone_id': chaperone_id, 'origin_id':origin_id, 'destination_id': destination_id})
 
-    })
+    # query = db.insert('chekins',{
+    # 'timestamp' : timestamp,
+    # 'kid_id' : kid_id,
+    # 'chaparone_id' : session[id],
+    # 'origin_id' : origin,
+    # 'dest_id' : destination
+    #
+    # })
     return render_template (
-    'checkin_submit.html',
-    kid_qr = kid_qr,
+    'checkin_submit.html'
+    kid_id = kid_qr,
     timestamp = timestamp,
     origin = origin,
     destination = destination
