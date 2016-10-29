@@ -33,13 +33,10 @@ def submit_login():
         if user.pws == pws and user.uname == uname:
             session['id'] = user.id
             flash("Successfully Logged In")
-            print session['id']
-        return render_template(
-        'register.html',
-        # userID = session['id']
-        )
-    else:
-        return redirect('/')
+            return render_template(
+            'register.html')
+
+    return redirect('/')
 
 @app.route('/register')
 def render_register():
