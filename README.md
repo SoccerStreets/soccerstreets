@@ -17,7 +17,7 @@ Shelly is a mother who would like to ensure the safe departure and arrival of he
 
 
 ##Github Link:
-http://
+https://github.com/SoccerStreets/soccerstreets
 
 ##Team Members:
 * Lillie Madali, project manager
@@ -54,12 +54,13 @@ After mapping out the process, the team decided on an MVP. One challenge we face
 
 
 ####Stretch Goals
-* 1
-* 2
-* 3
+* Real-time tracking of youth with travelling icons
+
 
 ##Challenges & Solutions:
 ####Some of the biggest challenges we faced with this project build included:
+* Challenge: Implementing the QR scanner was challenging as the QR scanner codes that were available did not actually do what we wanted to do.
+* Solution: The team implemented a work-around for the QR scanner by creating an ID for the parent and the child.
 
 ##Code Snippets
 ####Parent Registration
@@ -93,16 +94,6 @@ After mapping out the process, the team decided on an MVP. One challenge we face
 
           <!-- <label><b>Marta Station</b></label> -->
           <input class ="Station" type="text" placeholder="Nearest Marta Station" name="station" required>
-```
-
-####
-```
-This is sample code
-```
-
-####
-```
-This is sample code
 ```
 
 ##Screenshots
