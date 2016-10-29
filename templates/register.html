@@ -44,7 +44,7 @@
           <!-- <label><b>Phone Number</b></label> -->
           <input type="text" placeholder="Phone Number" name="phone" required>
 
-          <!-- <label><b>Marta Station</b></label> -->
+          <label>Select your marta station</label>
           <select name = "station_id" class="selectpicker" data-style="btn-primary">
             {% for station in query %}
             <option value="{{station.id}}">{{station.name}}</option>
