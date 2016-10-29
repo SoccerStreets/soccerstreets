@@ -92,17 +92,19 @@ def submit_register():
         'individ_id' : query.id,
         'phone' : phone,
         })
+        return redirect('/'+ radio + '/' + str(query.id)))
     elif radio == 'parent':
         db.insert('phonenums',{
         'individ_id' : query.id,
         'phone' : phone,
         })
+        return redirect('/'+ radio + '/' + str(query.id)))
     elif radio == 'chaperone':
         db.insert('phonenums',{
         'individ_id' : query.id,
         'phone' : phone,
         })
-    return redirect('/')
+        return redirect('/'+ radio + '/' + str(query.id)))
 
 
 @app.route('/logout')
@@ -122,7 +124,6 @@ def checkin():
     r = requests.post('https://intense-shore-33606.herokuapp.com/api/v1/checkins', data={'participant_id':kid_id, 'timestamp': timestamp, 'chaperone_id': chaperone_id, 'origin_id':origin_id, 'destination_id': destination_id})
     flash("Checkin Success")
     return redirect ('/chap_checkin_submit')
-
 
 @app.route('/checkin5', methods=['POST'])
 def checkin5():
@@ -156,23 +157,22 @@ def render_parent(parent_id):
 
 @app.route('/kid/<kid_id>')
 def render_kid(kid_id):
-    # kid_id = kid_id
-    # kid_username = session['username']
-    # kid_fname = session['firstname']
-    # kid_lname = session['lastname']
     return render_template(
         'kid.html',
-        # kid_id = kid_id,
-        # kid_username = kid_username,
-        # kid_fname = kid_fname,
-        # kid_lname = kid_lname
     )
 
-@app.route('/chaperone')
-def render_chaperone():
+@app.route('/chaperone/<chaperone_id>')
+def render_chaperone(chaperone_id):
+    # Query to get chaperone information
+    chaperone = db.query("select individuals.firstname as f_name, phonenums.phone as phone_num from individuals inner join phonenums on individuals.id = phonenums.individ_id where individuals.id = $1", chaperone_id).namedresult()[0]
+
+    # #Query to get chaperone photo
+    # pic = db.query("select picture.file as photo from pictures inner join pictures_individ on pictures.id = pictures_individ.picture_id inner join indviduals on pictures_individ.individ_id = individuals.id where individuals.id = $1", chaperone_id).namedresult()[0].photo
+
     return render_template(
-        'chaperone.html'
-    )
+        'chaperone.html',
+        phone = chaperone.phone_num
+)
 
 
 @app.route('/upload', methods=['POST'])
