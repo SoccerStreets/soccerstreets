@@ -1,9 +1,10 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<h1>{{parent.name}}</h1>
+<h1>{{kid.name}}</h1>
+
 <h3>Here are your kids:</h3>
     {% for kid in kids_list %}
-        <a href="/kid/{{kid_id}}">{{kid.kid_fname}} {{kid.kid_lname}}</a>
+        <a href="/kid/{{kid_id}}">{{kid.name}}</a>
     {% endfor %}
 {% endblock %}

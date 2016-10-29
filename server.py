@@ -81,21 +81,13 @@ def submit_register():
     uname = request.form.get('uname');
     pws = request.form.get('pws');
     radio = request.form.get('optradio');
-    parentid = request.form.get('parentid')
     db.insert('individuals',{
     'lastname' : lname,
     'firstname' : fname,
-    'uname' : uname,
-    'pws' : pws
-
     })
-    query = db.query("Select id from individuals where uname = $1",uname).namedresult()[0];
+    query = db.query("Select id from individuals where uname = $1",uname);
     if radio == 'kid':
-        db.insert('kids_breeze',{
-        'kid_id' : query.id,
-        'breeze' : breeze
-        })
-    else if radio == ''
+        db.insert('')
 
 
 
@@ -137,26 +129,42 @@ def checkin5():
 def checkout():
     return redirect('/login')
 
-@app.route('/parent')
-def render_parent():
+@app.route('/parent/<parent_id>')
+def render_parent(parent_id):
+    # Query to get parent information
+    parent = db.query('select individuals.firstname from individuals inner join phonenums on individuals.id = phonenums.individ_id where individuals.id = $1', parent_id).namedresult()[0]
+
     # Query to get all the parent's kids
-    kids_list = db.query('')
+    kids_list = db.query("select kids.id as kid_id, kids.firstname as kid_fname, kids.lastname as kid_lname from individuals as parents inner join kids_parents on parents.id = kids_parents.parent_id inner join individuals as kids on kids_parents.kid_id = kids.id where parents.id = $1", parent_id).namedresult()
+
     return render_template(
         'parent.html',
+        parent = parent,
         kids_list = kids_list
+    )
+
+@app.route('/parent/kid/<kid_id>')
+def render_parent_kid():
+
+
+    return render_template(
+        'kid.html'
+    )
+
+@app.route('/kid')
+def render_kid():
+    session['id'] = kid_id
+    session['username']
+
+    return render_template(
+        'kid.html',
+        kid_id = kid_id
     )
 
 @app.route('/chaperone')
 def render_chaperone():
     return render_template(
         'chaperone.html'
-    )
-
-@app.route('/kid')
-def render_kid():
-    # kids_list =
-    return render_template(
-        'kid.html'
     )
 
 
