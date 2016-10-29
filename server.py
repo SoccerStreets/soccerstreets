@@ -81,13 +81,21 @@ def submit_register():
     uname = request.form.get('uname');
     pws = request.form.get('pws');
     radio = request.form.get('optradio');
+    parentid = request.form.get('parentid')
     db.insert('individuals',{
     'lastname' : lname,
     'firstname' : fname,
+    'uname' : uname,
+    'pws' : pws
+
     })
-    query = db.query("Select id from individuals where uname = $1",uname);
+    query = db.query("Select id from individuals where uname = $1",uname).namedresult()[0];
     if radio == 'kid':
-        db.insert('')
+        db.insert('kids_breeze',{
+        'kid_id' : query.id,
+        'breeze' : breeze
+        })
+    else if radio == ''
 
 
 
