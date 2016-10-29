@@ -169,10 +169,13 @@ def render_chaperone(chaperone_id):
     # #Query to get chaperone photo
     # pic = db.query("select picture.file as photo from pictures inner join pictures_individ on pictures.id = pictures_individ.picture_id inner join indviduals on pictures_individ.individ_id = individuals.id where individuals.id = $1", chaperone_id).namedresult()[0].photo
 
+    query2 = db.query("select kids.name as kid_name from individuals as chaperones inner join on checkins where chaperones.id = checkins.chaperone_id inner join individuals as kids on checkins.kid_id = kids.id where checkins.timestamp > DATEADD(HOUR, -1, GETDATE())").namedresult()
+    print query2
     return render_template(
         'chaperone.html',
         phone = chaperone.phone_num,
         query1 = query1,
+        query2 = query2
 )
 
 

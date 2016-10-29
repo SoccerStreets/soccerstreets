@@ -38,6 +38,17 @@
       <div>
         <h4 class="checkin"></h4>
       </div>
+      <h4>Current Kids</h4>
+      <table>
+        {% for query in query2 %}
+        <tr>
+            <td>
+              query.kid_name
+            </td>
+        </tr>
+        {% endfor %}
+      </table>
+
    </div>
   </form>
 {% endblock %}
