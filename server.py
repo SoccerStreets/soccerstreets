@@ -27,38 +27,34 @@ def submit_login():
     uname = request.form.get('uname')
     pws = request.form.get('pws')
     results = db.query("select * from individuals where uname = $1", uname).namedresult()
+    print results[0]
     if len(results) > 0:
         user = results[0]
         if user.pws == pws and user.uname == uname:
             session['id'] = user.id
+            session['username'] = user.uname
+            session['firstname'] = user.firstname
+            session['lastname'] = user.lastname
             flash("Successfully Logged In")
-            return render_template(
-            'register.html')
+            return redirect('/'+ user.type + '/' + str(user.id))
 
+        flash("Couldn't Log In")
     return redirect('/')
+
+@app.route('/log_out', methods=['POST'])
+def log_out():
+   del session['id']
+   del session['username']
+   del session['firstname']
+   del session['lastname']
+   flash("Successfully Logged Out")
+   return redirect('/')
 
 @app.route('/register')
 def render_register():
     return render_template(
         'register.html'
     )
-
-# @app.route('/chooseUserType')
-# def render_userform():
-#     userType = request.form.get('userType')
-#     if userType == 'chaperone'
-#         return render_template (
-#         'chaperone_signup.html'
-#         )
-#     elif userType == 'parent'
-#         return render_template (
-#         'parent_signup.html'
-#         )
-#     else
-#         return render_template (
-#         'kid_signup.html'
-#         )
-
 
 @app.route('/submit_register', methods=['POST'])
 def submit_register():
@@ -164,14 +160,18 @@ def render_parent_kid():
         'kid.html'
     )
 
-@app.route('/kid')
-def render_kid():
-    session['id'] = kid_id
-    session['username']
-
+@app.route('/kid/<kid_id>')
+def render_kid(kid_id):
+    # kid_id = kid_id
+    # kid_username = session['username']
+    # kid_fname = session['firstname']
+    # kid_lname = session['lastname']
     return render_template(
         'kid.html',
-        kid_id = kid_id
+        # kid_id = kid_id,
+        # kid_username = kid_username,
+        # kid_fname = kid_fname,
+        # kid_lname = kid_lname
     )
 
 @app.route('/chaperone')
