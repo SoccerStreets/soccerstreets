@@ -100,7 +100,7 @@ def submit_register():
     return redirect('/')
 
 
-@app.route('/logout', methods=['POST'])
+@app.route('/logout')
 def logout():
     del session['username']
     flash("Successfully Logged Out")
