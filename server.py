@@ -114,7 +114,7 @@ def logout():
     return redirect('/')
 
 
-@app.route('/chap_checkin_submit', methods=['POST','GET'])
+@app.route('/chap_checkin_submit', methods=['POST'])
 def checkin():
     kid_id = request.form.get('kid_id');
     timestamp = time.time();
