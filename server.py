@@ -19,7 +19,6 @@ db = pg.DB(
 
 @app.route('/')
 def render_homepage():
-    pages = db.query("select p.pagename, max(c.timestamp) from pages as p, content as c where p.id=c.pageid group by p.pagename").namedresult()
     loggedin = False
     try:
         session['username']
@@ -28,8 +27,8 @@ def render_homepage():
         loggedin = False
 
     return render_template(
-        'homepage.html',
-        title="Jesslyn's Wiki",
+        'login.html',
+        title="SoccerStreets",
         pages = pages,
         loggedin = loggedin
     )
@@ -42,7 +41,7 @@ def submit_login():
     if len(results) > 0:
         user = results[0]
         if user.password == password:
-            session['username'] = user.username
+            session['id'] = user.id
             flash("Successfully Logged In")
             return redirect('/')
         else:
@@ -55,3 +54,34 @@ def logout():
     del session['username']
     flash("Successfully Logged Out")
     return redirect('/')
+
+@app.route('/checkin', methods=['POST'])
+def checkin():
+    kid_id = request.form.get('kid_id');
+    timestamp = time.time();
+    origin =request.form.get('origin');
+    destination = request.form.get('destination');
+    query = db.insert('chekins',{
+    'timestamp' : timestamp,
+    'kid_id' : kid_id,
+    'chaparone_id' : session[id],
+    'origin_id' : origin,
+    'dest_id' : destination
+
+    })
+        return render_template(
+        'checkin_submit.html',
+        kid_qr = kid_qr;
+        timestamp = timestamp;
+        origin = origin;
+        destination = destination;
+        )
+        
+@app.route('/checkin5', methods=['POST'])
+def checkin5():
+        query = db.query("")
+
+
+
+@app.route('/checkout', methods=['POST'])
+def checkout():
