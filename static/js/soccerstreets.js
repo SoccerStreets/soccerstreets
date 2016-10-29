@@ -24,6 +24,4 @@ $(document).ready(function(){
     console.log("fades");
   });
 
-  alert("HI")
-
 });
