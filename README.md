@@ -1,5 +1,5 @@
-## Trip Goalie
-<img src="https://github.com/lilliemadali/soccerstreets/blob/master/trip-goalie-logo-icon.png" height="100">
+
+<img src="https://github.com/lilliemadali/soccerstreets/blob/master/Trip-Goalie-Logo-with-tag.png" height="150">
 ######
 [Live Project](http://#)   |  [Overview](https://github.com/SoccerStreets/soccerstreets#overview)   |   [Team Members](https://github.com/SoccerStreets/soccerstreets#team-members)   |   [What We Used](https://github.com/SoccerStreets/soccerstreets#what-we-used)   |   [MVP](https://github.com/SoccerStreets/soccerstreets#mvp-minimum-viable-product)   |   [Challenges](https://github.com/SoccerStreets/soccerstreets#challenges--solutions)   |   [Code](https://github.com/SoccerStreets/soccerstreets#code-snippets)   | [Screenshots](https://github.com/SoccerStreets/soccerstreets#screenshots)   |   [Contributing](https://github.com/SoccerStreets/soccerstreets#contribute-to-trip-goalie)
 
