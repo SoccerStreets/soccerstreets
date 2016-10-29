@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>soccerstreets</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/soccerstreets.css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Quicksand" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+
+
+  <body>
+
+    <div class="header">
+      <h1>Soccer Chaperones</h1>
+    </div>
+
+    <div class="container-fluid">
+      <form action="action_page.php">
+
+        <label><b>I am a: </b></label>
+
+        <label class="radio-inline">
+          <input type="radio" name="optradio" value="chaperone">Chaperone
+        </label>
+
+        <label class="radio-inline">
+          <input id="ParentRadio" type="radio" name="optradio" value="parent">Parent
+        </label>
+
+        <label class="radio-inline">
+          <input type="radio" name="optradio" value="kid">Kid
+        </label>
+
+        <div class="container">
+          <!-- <label><b>First Name</b></label> -->
+          <input type="text" placeholder="First Name" name="fname" required>
+
+          <!-- <label><b>Last Name</b></label> -->
+          <input type="text" placeholder="Last Name" name="lname" required>
+
+          <!-- <label><b>Phone Number</b></label> -->
+          <input type="text" placeholder="Phone Number" name="phone" required>
+
+          <!-- <label><b>Marta Station</b></label> -->
+          <input type="text" placeholder="Nearest Marta Station" name="station" required>
+
+          <!-- <label class="Breeze"><b>Breeze card number</b></label> -->
+          <input class="Breeze" type="text" placeholder="Breeze Card Number" name="breeze" required>
+
+          <!-- <label><b>Address</b></label> -->
+          <input type="text" placeholder="Address" name="address" required>
+
+          <!-- <label><b>Username</b></label> -->
+          <input type="text" placeholder="Username" name="uname" required>
+
+          <!-- <label><b>Password</b></label> -->
+          <input type="password" placeholder="Password" name="psw" required>
+
+          <button type="submit">Register</button>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" class="cancelbtn">Cancel</button>
+        </div>
+
+      </form>
+   </div>
+
+  </body>
+  <script src="js/jquery-1.12.0.js"></script>
+  <script type ='text/javascript' src ='js/soccerstreets.js'></script>
+</html>

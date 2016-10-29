@@ -1,5 +1,4 @@
 from flask import Flask, redirect, render_template, request, session, flash
-from wiki_linkify import wiki_linkify
 import markdown
 import pg
 import time
@@ -29,7 +28,6 @@ def render_homepage():
     return render_template(
         'login.html',
         title="SoccerStreets",
-        pages = pages,
         loggedin = loggedin
     )
 
@@ -48,6 +46,51 @@ def submit_login():
             return redirect('/')
     else:
         return redirect('/')
+
+@app.route('/register')
+def render_register():
+    return render_template(
+        'register.html'
+    )
+
+# @app.route('/chooseUserType')
+# def render_userform():
+#     userType = request.form.get('userType')
+#     if userType == 'chaperone'
+#         return render_template (
+#         'chaperone_signup.html'
+#         )
+#     elif userType == 'parent'
+#         return render_template (
+#         'parent_signup.html'
+#         )
+#     else
+#         return render_template (
+#         'kid_signup.html'
+#         )
+
+
+@app.route('/submit_register')
+def submit_register():
+    fname = request.form.get('fname');
+    lname = request.form.get('lname');
+    phone = request.form.get('phone');
+    station = request.form.get('station');
+    breeze = request.form.get('breeze');
+    address = request.form.get('address');
+    uname = request.form.get('uname');
+    pws = request.form.get('pws');
+    radio = request.form.get('optradio');
+    db.insert('individuals',{
+    'lastname' : lname,
+    'firstname' : fname,
+    })
+    query = db.query("Select id from individuals where uname = $1",uname);
+    if radio == 'kid':
+        db.insert('')
+
+
+
 
 @app.route('/logout', methods=['POST'])
 def logout():
@@ -69,19 +112,81 @@ def checkin():
     'dest_id' : destination
 
     })
-        return render_template(
-        'checkin_submit.html',
-        kid_qr = kid_qr;
-        timestamp = timestamp;
-        origin = origin;
-        destination = destination;
-        )
-        
+    return render_template (
+    'checkin_submit.html',
+    kid_qr = kid_qr,
+    timestamp = timestamp,
+    origin = origin,
+    destination = destination
+    )
+
 @app.route('/checkin5', methods=['POST'])
 def checkin5():
-        query = db.query("")
-
-
+    query = db.query("")
+    return redirect('/login')
 
 @app.route('/checkout', methods=['POST'])
 def checkout():
+    return redirect('/login')
+
+@app.route('/parent')
+def render_parent():
+    # Query to get all the parent's kids
+    kids_list = db.query('')
+    return render_template(
+        'parent.html',
+        kids_list = kids_list
+    )
+
+@app.route('/chaperone')
+def render_chaperone():
+    return render_template(
+        'chaperone.html'
+    )
+
+@app.route('/kid')
+def render_kid():
+    # kids_list =
+    return render_template(
+        'kid.html'
+    )
+
+
+@app.route('/upload', methods=['POST'])
+def upload():
+    file_name_size = 15
+    user_id = request.form.get("id")
+    print "user id %s\n\n\n" % user_id
+    project_id = request.form.get("project_id")
+    print "project id %s\n\n\n" % project_id
+    # Get the name of the uploaded file
+    file = request.files['file']
+    # Check if the file is one of the allowed types/extensions
+    if file and allowed_file(file.filename):
+        # Make the filename safe, remove unsupported chars
+        filename = secure_filename(file.filename)
+        file_extension = filename.rsplit('.', 1)[1]
+        # Create new random name for the file using letters and digits
+        filename = ''.join([random.choice(string.ascii_letters + string.digits) for n in xrange(file_name_size)]) + "." + file_extension
+        # Move the file form the temporal folder to
+        # the upload folder we setup
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        # Redirect the user to the uploaded_file route, which
+        # will basically show on the browser the uploaded file
+        if user_id:
+            db.update (
+                "users", {
+                    "id": user_id,
+                    "avatar": filename
+                }
+            )
+        elif project_id:
+            db.insert (
+                "image",
+                image = filename,
+                project_id = project_id
+            )
+        return redirect('/')
+
+if __name__ == '__main__':
+    app.run(debug=True)
