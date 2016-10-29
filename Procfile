@@ -1,1 +1,1 @@
-web: python server.py
+web: gunicorn soccerstreets:app --log-file=-
