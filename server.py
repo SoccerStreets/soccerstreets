@@ -1,5 +1,4 @@
 from flask import Flask, redirect, render_template, request, session, flash
-from wiki_linkify import wiki_linkify
 import markdown
 import pg
 import time
@@ -29,7 +28,6 @@ def render_homepage():
     return render_template(
         'login.html',
         title="SoccerStreets",
-        pages = pages,
         loggedin = loggedin
     )
 
@@ -48,6 +46,51 @@ def submit_login():
             return redirect('/')
     else:
         return redirect('/')
+
+@app.route('/register')
+def render_register():
+    return render_template(
+        'register.html'
+    )
+
+# @app.route('/chooseUserType')
+# def render_userform():
+#     userType = request.form.get('userType')
+#     if userType == 'chaperone'
+#         return render_template (
+#         'chaperone_signup.html'
+#         )
+#     elif userType == 'parent'
+#         return render_template (
+#         'parent_signup.html'
+#         )
+#     else
+#         return render_template (
+#         'kid_signup.html'
+#         )
+
+
+@app.route('/submit_register')
+def submit_register():
+    fname = request.form.get('fname');
+    lname = request.form.get('lname');
+    phone = request.form.get('phone');
+    station = request.form.get('station');
+    breeze = request.form.get('breeze');
+    address = request.form.get('address');
+    uname = request.form.get('uname');
+    pws = request.form.get('pws');
+    radio = request.form.get('optradio');
+    db.insert('individuals',{
+    'lastname' : lname,
+    'firstname' : fname,
+    })
+    query = db.query("Select id from individuals where uname = $1",uname);
+    if radio == 'kid':
+        db.insert('')
+
+
+
 
 @app.route('/logout', methods=['POST'])
 def logout():
@@ -68,22 +111,22 @@ def checkin():
     'origin_id' : origin,
     'dest_id' : destination
     })
-        return render_template(
-        'checkin_submit.html',
-        kid_qr = kid_qr;
-        timestamp = timestamp;
-        origin = origin;
-        destination = destination;
-        )
+    return render_template (
+    'checkin_submit.html',
+    kid_qr = kid_qr,
+    timestamp = timestamp,
+    origin = origin,
+    destination = destination
+    )
 
 @app.route('/checkin5', methods=['POST'])
 def checkin5():
-        query = db.query("")
-
+    query = db.query("")
+    return redirect('/login')
 
 @app.route('/checkout', methods=['POST'])
 def checkout():
-
+    return redirect('/login')
 
 @app.route('/parent')
 def render_parent():
@@ -101,8 +144,8 @@ def render_chaperone():
     )
 
 @app.route('/kid')
-def render_chaperone():
-    kids_list = # Query to get all the kids
+def render_kid():
+    # kids_list =
     return render_template(
         'kid.html'
     )
@@ -143,3 +186,6 @@ def upload():
                 project_id = project_id
             )
         return redirect('/')
+
+if __name__ == '__main__':
+    app.run(debug=True)
