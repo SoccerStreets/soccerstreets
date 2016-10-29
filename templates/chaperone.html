@@ -1,29 +1,20 @@
-<!-- <!DOCTYPE html>
-<html>
-  <head>
-    <title>Chaperone</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../static/css/soccerstreets.css">
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Quicksand" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head> -->
-
 {% extends 'layout.html'%}
-{% body block%}
+
+{% block body%}
 
     <div class="header">
       <h1>Soccer Chaperones</h1>
     </div>
 
     <div class="container-fluid">
-
+      <h2>{{session['firstname']}} {{session['lastname']}}</h2>
+      <p>
+          {{phone}}
+      </p>
       <h4>Scan the QR code on the child's phone</h4>
       <h4 id="name"></h4>
       <input id="ID" type="text" placeholder="Enter the child's ID " name="ID">
-      <button id="confirm" class='btn-success'>Confirm Check In</button>
-
+      <button id="confirm" class="btn-success">Confirm Check In</button>
       <div>
         <h4 class="checkin"></h4>
       </div>

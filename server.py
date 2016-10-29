@@ -172,23 +172,18 @@ def render_parent(parent_id):
 
 @app.route('/kid/<kid_id>')
 def render_kid(kid_id):
-    # kid_id = kid_id
-    # kid_username = session['username']
-    # kid_fname = session['firstname']
-    # kid_lname = session['lastname']
     return render_template(
         'kid.html',
-        # kid_id = kid_id,
-        # kid_username = kid_username,
-        # kid_fname = kid_fname,
-        # kid_lname = kid_lname
     )
 
-@app.route('/chaperone')
-def render_chaperone():
+@app.route('/chaperone/<chaperone_id>')
+def render_chaperone(chaperone_id):
+    # Query to get chaperone information
+    chaperone = db.query("select individuals.firstname as f_name, phonenums.phone as phone_num from individuals inner join phonenums on individuals.id = phonenums.individ_id where individuals.id = $1", chaperone_id).namedresult()[0]
     return render_template(
-        'chaperone.html'
-    )
+        'chaperone.html',
+        phone = chaperone.phone_num
+)
 
 
 @app.route('/upload', methods=['POST'])
