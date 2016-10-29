@@ -25,18 +25,17 @@ def render_homepage():
 @app.route('/submit_login', methods=['POST'])
 def submit_login():
     uname = request.form.get('uname')
-    pws = request.form.get('pwd')
+    pws = request.form.get('pws')
     results = db.query("select * from individuals where uname = $1", uname).namedresult()
     if len(results) > 0:
         user = results[0]
-        if user.pws == pws:
+        if user.pws == pws and user.uname == uname:
             session['id'] = user.id
             flash("Successfully Logged In")
-            print session['id']
-        return render_template(
-        'register.html')
-    else:
-        return redirect('/')
+            return render_template(
+            'register.html')
+
+    return redirect('/')
 
 @app.route('/register')
 def render_register():
