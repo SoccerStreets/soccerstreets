@@ -164,7 +164,7 @@ def render_kid(kid_id):
 @app.route('/chaperone/<chaperone_id>')
 def render_chaperone(chaperone_id):
     # Query to get chaperone information
-    chaperone = db.query("select distinct (individuals.firstname) individuals.firstname as f_name, phonenums.phone as phone_num from individuals inner join phonenums on individuals.id = phonenums.individ_id where individuals.id = $1", chaperone_id).namedresult()[0]
+    chaperone = db.query("select individuals.firstname as f_name, phonenums.phone as phone_num from individuals inner join phonenums on individuals.id = phonenums.individ_id where individuals.id = $1", chaperone_id).namedresult()[0]
     query1 = db.query("Select * from stations").namedresult();
     # #Query to get chaperone photo
     # pic = db.query("select picture.file as photo from pictures inner join pictures_individ on pictures.id = pictures_individ.picture_id inner join indviduals on pictures_individ.individ_id = individuals.id where individuals.id = $1", chaperone_id).namedresult()[0].photo
