@@ -45,8 +45,11 @@
           <input type="text" placeholder="Phone Number" name="phone" required>
 
           <!-- <label><b>Marta Station</b></label> -->
-          <input class ="Station" type="text" placeholder="Nearest Marta Station" name="station" required>
-
+          <select name = "station_id" class="selectpicker" data-style="btn-primary" style="display: none;">
+            {% for station in query %}
+            <option value="{{station.id}}">{{station.name}}</option>
+            {% endfor %}
+          </select>
           <!-- <label class="Breeze"><b>Breeze card number</b></label> -->
           <input class="Breeze" type="text" placeholder="Breeze Card Number" name="breeze" required>
 
