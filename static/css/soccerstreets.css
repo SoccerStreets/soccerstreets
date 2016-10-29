@@ -61,7 +61,7 @@ img {
 .qrcode {
     height:40%;
     width: 40%;
-    border-radius: 0%;
+    border-radius: 0;
     margin:10px;
 }
 
