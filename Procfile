@@ -1,1 +1,1 @@
-web: gunicorn soccerstreet:app --log-file=-
+web: gunicorn server:app --log-file=-
