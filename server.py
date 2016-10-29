@@ -66,6 +66,7 @@ def submit_register():
     station = request.form.get('station_id');
     breeze = request.form.get('breeze');
     # address = request.form.get('address');
+    parentid = request.form.get('parentid');
     uname = request.form.get('uname');
     pws = request.form.get('pws');
     radio = request.form.get('optradio');
