@@ -3,13 +3,13 @@
 
      {% block body %}
     <div class="header">
-      <h1>Soccer Chaperones</h1>
+      <h1>Trip Goalies</h1>
     </div>
 
     <div class="container-fluid" style="text-align:center">
       <h4>Welcome {{session['firstname']}} {{session['lastname']}}</h4>
       <h4>Present to Chaperone</h4>
-      <img class="qrcode" src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&size=100x100" alt="" title="" />
+      <img class="qrcode" src="../static/css/trip-goalie-logo-icon.png" alt="" title="" />
       <h4 id="name"></h4>
       <input id="destInput" type="text" placeholder="Enter your destination e.g 'civic center station' " name="destination">
       <button class = "btn-success">Geolocate</button>
