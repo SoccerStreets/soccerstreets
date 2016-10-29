@@ -26,7 +26,6 @@ http://
 * Candace Bazemore, marketing and graphic design
 * Lisa Copeland, user experience design
 * Kaushik Visvanathan, front-end web developer
-* Paris Walters, front-end web developer
 * Keyur Patel, back-end web developer
 * Andrew Hill, back-end web developer
 * Jesslyn Landgren, full-stack developer
