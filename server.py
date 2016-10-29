@@ -72,6 +72,7 @@ def submit_register():
     'firstname' : fname,
     'uname' : uname,
     'pws' : pws,
+    'type' : radio,
     })
     query = db.query("Select id from individuals where uname = $1",uname);
     if radio == 'kid':
