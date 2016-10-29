@@ -123,7 +123,7 @@ def checkin():
     chaperone_id = request.form.get('chaperone_id')
     r = requests.post('https://intense-shore-33606.herokuapp.com/api/v1/checkins', data={'participant_id':kid_id, 'timestamp': timestamp, 'chaperone_id': chaperone_id, 'origin_id':origin_id, 'destination_id': destination_id})
     flash("Checkin Success")
-    return redirect ('/chap_checkin_submit')
+    return redirect ('/chaperone.html')
 
 @app.route('/checkin5', methods=['POST'])
 def checkin5():
