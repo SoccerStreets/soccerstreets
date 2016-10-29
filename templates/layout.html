@@ -4,29 +4,37 @@
     <title>soccerstreets</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" type="text/css" href="../../static/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../../static/css/soccerstreets.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/soccerstreets.css">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Quicksand" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
 
   </head>
 
-  <div class="logout">
-      <a href="/logout"><button type="button" name="button">Log Out</button></a>
-  </div>
+
+  {% if session['username'] %}
+       <h4>Hello {{session['username']}}!</h4>
+           <form class="form" action="/log_out" method="post">
+               <div class="form-group">
+                   <button class="nr-btn fl left-btn" type="submit" action="/log_out" name="log_out">Log Out</button>
+               </div>
+           </form>
+       {% else %}
+       <h4>Hello!</h4>
+{% endif %}
 
   <body>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-            <div class="alert alert-dismissible">
+            <div class="toFade">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <ul class="flashes">
+
         {% for message in messages %}
-            <li>{{message}}</li>
+            <h4>{{message}}</h4>
         {% endfor %}
-            </ul>
+
             </div>
         {% endif %}
     {% endwith %}
@@ -34,6 +42,9 @@
     {% block body %}
     {% endblock %}
 
-  </body>
+</body>
+<script src="../static/js/jquery-1.12.0.js"></script>
+<script type ="text/javascript" src ="../static/js/chaperone.js"></script>
+
 
 </html>

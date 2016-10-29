@@ -38,7 +38,6 @@ def submit_login():
             session['lastname'] = user.lastname
             flash("Successfully Logged In")
             return redirect('/'+ user.type + '/' + str(user.id))
-
         flash("Couldn't Log In")
     return redirect('/')
 
@@ -134,8 +133,8 @@ def checkin():
     # })
 
     return render_template (
-    'checkin_submit.html'
-    kid_id = kid_qr,
+    'checkin_submit.html',
+    kid_id = kid_id,
     timestamp = timestamp,
     origin = origin,
     destination = destination
@@ -164,13 +163,12 @@ def render_parent(parent_id):
         kids_list = kids_list
     )
 
-@app.route('/parent/kid/<kid_id>')
-def render_parent_kid():
-
-
-    return render_template(
-        'kid.html'
-    )
+# @app.route('/parent/kid/<kid_id>')
+# def render_parent_kid():
+#
+#     return render_template(
+#         'kid.html'
+#     )
 
 @app.route('/kid/<kid_id>')
 def render_kid(kid_id):

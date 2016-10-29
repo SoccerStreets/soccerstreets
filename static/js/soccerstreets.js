@@ -20,4 +20,10 @@ $(document).ready(function(){
 
   });
 
+  $('.toFade').fadeOut(3200, function(){
+    console.log("fades");
+  });
+
+  alert("HI")
+
 });

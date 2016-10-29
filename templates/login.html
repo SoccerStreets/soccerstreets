@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
   <head>
     <title>soccerstreets</title>
@@ -8,12 +8,13 @@
     <link rel="stylesheet" type="text/css" href="static/css/soccerstreets.css">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Quicksand" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
+  </head> -->
+  
+{% extends 'layout.html'%}
 
 
 
-  <body>
-
+{% block body%}
     <div class="header">
       <h1>Soccer Chaperones</h1>
     </div>
@@ -41,7 +42,4 @@
 
     </form>
    </div>
-
-  </body>
-
-</html>
+{% endblock %}
