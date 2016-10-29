@@ -110,20 +110,21 @@ def logout():
     flash("Successfully Logged Out")
     return redirect('/')
 
-@app.route('/checkin', methods=['POST'])
+@app.route('/checkin_origin', methods=['POST'])
 def checkin():
     kid_id = request.form.get('kid_id');
     timestamp = time.time();
     origin =request.form.get('origin');
-    destination = request.form.get('destination');
+    if origin != 'five-points':
+        destination = five-points
     query = db.insert('chekins',{
     'timestamp' : timestamp,
     'kid_id' : kid_id,
     'chaparone_id' : session[id],
     'origin_id' : origin,
     'dest_id' : destination
-
     })
+
     return render_template (
     'checkin_submit.html',
     kid_qr = kid_qr,
