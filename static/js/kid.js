@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-alert("kid.js")
 
 var lat,lon
 var address
