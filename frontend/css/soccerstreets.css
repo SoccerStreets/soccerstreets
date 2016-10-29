@@ -3,6 +3,10 @@ body {
     text-align: center;
 }
 
+.header {
+    margin-bottom: 25px;
+}
+
 .container {
     margin:auto;
 }
@@ -52,6 +56,13 @@ img {
     width: 10%;
     height: 10%;
     border-radius: 50%;
+}
+
+.qrcode {
+    height:40%;
+    width: 40%;
+    border-radius: 0%;
+    margin:10px;
 }
 
 /* Add padding to containers */
