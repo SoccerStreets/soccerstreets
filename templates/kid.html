@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>geolocation</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/soccerstreets.css">
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Quicksand" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
+{% extends 'layout.html' %}
 
-  <body>
 
+     {% block body %}
     <div class="header">
       <h1>Soccer Chaperones</h1>
     </div>
 
     <div class="container-fluid">
-
+      <h4>Welcome {{session['firstname']}} {{session['lastname']}}</h4>
       <h4>Present to Chaperone</h4>
       <img class="qrcode" src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&size=100x100" alt="" title="" />
       <h4 id="name"></h4>
@@ -28,6 +18,7 @@
         <h4 class="travTime">Travel Time</h4>
       </div>
    </div>
+   {% endblock %}
 
   </body>
   <script src="js/jquery-1.12.0.js"></script>
