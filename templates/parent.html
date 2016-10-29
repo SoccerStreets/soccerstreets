@@ -1,9 +1,6 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<h1>{{parent.name}}</h1>
-<h3>Here are your kids:</h3>
-    {% for kid in kids_list %}
-        <a href="/kid/{{kid_id}}">{{kid.kid_fname}} {{kid.kid_lname}}</a>
-    {% endfor %}
+<h3>Hello! {{parent.name}}</h3>
+<h1> Please note down your unique number : {{parent_id}}. It is essential for signing up your kids.</h1>
 {% endblock %}

@@ -144,16 +144,12 @@ def render_parent(parent_id):
 
     return render_template(
         'parent.html',
+        parent_id = parent_id,
         parent = parent,
         kids_list = kids_list
     )
 
-# @app.route('/parent/kid/<kid_id>')
-# def render_parent_kid():
-#
-#     return render_template(
-#         'kid.html'
-#     )
+
 
 @app.route('/kid/<kid_id>')
 def render_kid(kid_id):
