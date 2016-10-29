@@ -93,13 +93,13 @@ def submit_register():
         'phone' : phone,
         })
         return redirect('/'+ radio + '/' + str(query.id))
-        elif radio == 'parent':
+    elif radio == 'parent':
         db.insert('phonenums',{
         'individ_id' : query.id,
         'phone' : phone,
         })
         return redirect('/'+ radio + '/' + str(query.id))
-        elif radio == 'chaperone':
+    elif radio == 'chaperone':
         db.insert('phonenums',{
         'individ_id' : query.id,
         'phone' : phone,
