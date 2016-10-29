@@ -23,13 +23,13 @@
       <input id="ID" type="text" placeholder="Enter the child's ID " name="kid_id">
       <label>Origin</label>
       <select name = "origin_id" class="selectpicker" data-style="btn-primary">
-        {% for station in query %}
+        {% for station in query1 %}
         <option value="{{station.id}}">{{station.name}}</option>
         {% endfor %}
       </select>
       <label>Distination</label>
       <select name = "destination_id" class="selectpicker" data-style="btn-primary">
-        {% for station in query %}
+        {% for station in query1 %}
         <option value="{{station.id}}">{{station.name}}</option>
         {% endfor %}
       </select>
