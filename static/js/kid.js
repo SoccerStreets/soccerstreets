@@ -83,7 +83,7 @@ $('#name').text(kidsName)
 $('.btn-success').on('click', function(){
 	destination= document.getElementById('destInput').value
 	getIp()
-})
+});
 
 
 })
