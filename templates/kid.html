@@ -10,7 +10,7 @@
       <h4>Welcome {{session['firstname']}} {{session['lastname']}}</h4>
       <h4>Present to Chaperone</h4>
       <!-- <img class="qrcode" src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&size=100x100" alt="" title="" /> -->
-      <img src="{{ qrcode(str(session['id'])) }}">
+      <img src="{{ qrcode(session['id']|string) }}">
       <h4 id="name"></h4>
       <input id="destInput" type="text" placeholder="Enter your destination e.g 'civic center station' " name="destination">
       <button class = "btn-success">Geolocate</button>
