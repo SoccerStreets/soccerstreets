@@ -1,4 +1,5 @@
 from flask import Flask, redirect, render_template, request, session, flash
+from flask.ext.qrcode import QRcode
 import markdown
 import pg
 import time
@@ -6,6 +7,7 @@ from dotenv import load_dotenv, find_dotenv
 import os
 import requests
 
+QRcode(app)
 # load_dotenv(find_dotenv())
 # tmp_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask('SoccerStreets')  # , template_folder=tmp_dir
