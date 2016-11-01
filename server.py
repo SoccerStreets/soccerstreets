@@ -123,14 +123,7 @@ def checkin():
     origin_id = request.form.get('origin_id');
     destination_id = request.form.get('destination_id')
     chaperone_id = request.form.get('chaperone_id')
-    action = request.form.get('action')
-    query = db.query("select id as checkin_id from checkins where timestamp >= NOW() - '1 hour'::INTERVAL order by timestamp desc limit 1")
     r = requests.post('https://intense-shore-33606.herokuapp.com/api/v1/checkins', data={'participant_id':kid_id, 'timestamp': timestamp, 'chaperone_id': chaperone_id, 'origin_id':origin_id, 'destination_id': destination_id})
-    db.update(
-        'checkins',
-        {'id': checkin_id,
-         'action': action}
-    )
     flash("Checkin Success")
     return redirect ('/chaperone/' + chaperone_id)
 
@@ -174,7 +167,7 @@ def render_chaperone(chaperone_id):
     # #Query to get chaperone photo
     # pic = db.query("select picture.file as photo from pictures inner join pictures_individ on pictures.id = pictures_individ.picture_id inner join indviduals on pictures_individ.individ_id = individuals.id where individuals.id = $1", chaperone_id).namedresult()[0].photo
 
-    query2 = db.query("select checkins.action as action, kids.firstname as kid_fname, kids.lastname as kid_lname, phonenums.phone as parent_phone, parents.firstname as pfname from individuals as chaperones inner join checkins on chaperones.id = checkins.chaperone_id inner join individuals as kids on checkins.kid_id = kids.id  inner join kids_parents on kids.id = kids_parents.kid_id inner join individuals as parents on kids_parents.parent_id = parents.id inner join phonenums on parents.id = phonenums.individ_id where checkins.timestamp >= NOW() - '1 hour'::INTERVAL;").namedresult()
+    query2 = db.query("select kids.firstname as kid_fname, kids.lastname as kid_lname, phonenums.phone as parent_phone, parents.firstname as pfname from individuals as chaperones inner join checkins on chaperones.id = checkins.chaperone_id inner join individuals as kids on checkins.kid_id = kids.id  inner join kids_parents on kids.id = kids_parents.kid_id inner join individuals as parents on kids_parents.parent_id = parents.id inner join phonenums on parents.id = phonenums.individ_id where checkins.timestamp >= NOW() - '1 hour'::INTERVAL;").namedresult()
     print query2
     return render_template(
         'chaperone.html',
