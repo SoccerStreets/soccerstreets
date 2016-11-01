@@ -8,9 +8,11 @@ import os
 import requests
 
 
-# load_dotenv(find_dotenv())
-# tmp_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
-app = Flask('SoccerStreets')  # , template_folder=tmp_dir
+load_dotenv(find_dotenv())
+tmp_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
+
+
+app = Flask('SoccerStreets',template_folder=tmp_dir)
 QRcode(app)
 app.secret_key = "ksajoivnvaldksdjfj"
 db = pg.DB(
