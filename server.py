@@ -7,10 +7,8 @@ from dotenv import load_dotenv, find_dotenv
 import os
 import requests
 
-
 load_dotenv(find_dotenv())
 tmp_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
-
 
 app = Flask('SoccerStreets',template_folder=tmp_dir)
 QRcode(app)
@@ -25,7 +23,7 @@ db = pg.DB(
 @app.route('/')
 def render_homepage():
     return render_template(
-        'login.html'
+        'homepage.html'
             )
 
 @app.route('/submit_login', methods=['POST'])

@@ -3,6 +3,15 @@ body {
     text-align: center;
 }
 
+/*Login and Sign Up Homepage Buttons*/
+.logoBackground {
+    background-color: red;
+}
+
+.homepage-link-div {
+    background-color: blue;
+}
+
 .header {
     margin-bottom: 25px;
     background-color: #E5C100;
@@ -53,11 +62,11 @@ button {
 }
 
 /* Avatar image */
-img {
+/*img {
     width: 10%;
     height: 10%;
     border-radius: 50%;
-}
+}*/
 
 .qrcode {
     height:40%;
