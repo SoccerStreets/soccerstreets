@@ -12,6 +12,7 @@ body {
 .logoBackground {
     /*border: 4px solid red;*/
     background-image: url('/static/img/homepage_bg.jpg');
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
