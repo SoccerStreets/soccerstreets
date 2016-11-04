@@ -5,7 +5,7 @@ import pg
 import time
 from dotenv import load_dotenv, find_dotenv
 import os
-import requests
+# import requests
 
 load_dotenv(find_dotenv())
 tmp_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
@@ -19,11 +19,28 @@ db = pg.DB(
     passwd=os.environ.get('PG_PASSWORD')
 )
 
+# Renders Homepage (login and register)
 @app.route('/')
 def render_homepage():
     return render_template(
         'homepage.html'
             )
+
+# Renders Login page (login form)
+@app.route('/login')
+def render_login():
+    return render_template(
+        'login.html'
+            )
+
+# Renders Login page (login form)
+@app.route('/register')
+def render_register():
+    query = db.query('Select * from stations').namedresult();
+    return render_template(
+        'register.html',
+        query = query,
+    )
 
 @app.route('/submit_login', methods=['POST'])
 def submit_login():
@@ -51,14 +68,6 @@ def log_out():
    del session['lastname']
    flash("Successfully Logged Out")
    return redirect('/')
-
-@app.route('/register')
-def render_register():
-    query = db.query('Select * from stations').namedresult();
-    return render_template(
-        'register.html',
-        query = query,
-    )
 
 @app.route('/submit_register', methods=['POST'])
 def submit_register():

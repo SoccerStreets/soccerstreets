@@ -1,36 +1,18 @@
-{% extends 'layout.html'%}
+{% extends 'layout.html' %}
 
-{% block main%}
-    <div class="header">
-      <h1>Trip Goalies</h1>
+{% block main %}
+
+<body>
+    <div class="topnav">
+        <img src="/static/img/Trip-Goalie-Logo.png" alt="" />
+        <a href="#">&#9776;</a>
     </div>
+    <div class="main-content">
 
-    <div class="buttons">
-        <a href="#"></a>
-        <a href="#"></a>
     </div>
-
-    <div class="container-fluid">
-    <form action="/submit_login" method="POST">
-
-      <div class="imgcontainer">
-        <img src="../static/css/trip-goalie-logo-icon.png" alt="Avatar" class="avatar">
-      </div>
-
-      <div class="container">
-        <label><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" required>
-
-        <label><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="pws" required>
-
-
-        <button type="submit">Login</button>
-
-        <a href="/register"><button class="btn-primary" type="button">Need an account? Sign Up!</button></a>
-        <input type="checkbox" checked="checked"> Remember me
-      </div>
-
-    </form>
-   </div>
+    <div class="bottom-buttons">
+        <a class="cancel" href="/">Cancel</a>
+        <a class="submit-register" href="/register">Submit</a>
+    </div>
+</body>
 {% endblock %}
