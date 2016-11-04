@@ -24,6 +24,7 @@ db = pg.DB(
 def render_homepage():
     return render_template(
         'homepage.html'
+
             )
 
 @app.route('/submit_login', methods=['POST'])
@@ -215,4 +216,5 @@ def upload():
         return redirect('/')
 
 if __name__ == '__main__':
+    app.config['TEMPLATE_AUTO_RELOAD'] = True
     app.run(debug=True)
