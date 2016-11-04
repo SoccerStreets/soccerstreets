@@ -1,11 +1,14 @@
-from flask import Flask, redirect, render_template, request, session, flash
+from flask import Flask, redirect, render_template, request, session, flash, url_for, send_from_directory
 # from flask.ext.qrcode import QRcode
 import markdown
+from werkzeug import secure_filename
 import pg
 import time
 from dotenv import load_dotenv, find_dotenv
 import os
 # import requests
+
+
 
 load_dotenv(find_dotenv())
 tmp_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
@@ -18,6 +21,19 @@ db = pg.DB(
     user=os.environ.get('PG_USERNAME'),
     passwd=os.environ.get('PG_PASSWORD')
 )
+
+#code for file upload
+
+app.config['UPLOAD_FOLDER'] = 'uploads/'
+app.config['ALLOWED_EXTENSIONS'] = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
+
+#for a given file determine whether it's an allowed type or not
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
+
 
 # Renders Homepage (login and register)
 @app.route('/')
@@ -71,6 +87,11 @@ def log_out():
 
 @app.route('/submit_register', methods=['POST'])
 def submit_register():
+    file = request.files['file']
+    # Check if the file is one of the allowed types/extensions
+    if file and allowed_file(file.filename):
+        img = file.read();
+
     fname = request.form.get('fname');
     lname = request.form.get('lname');
     phone = request.form.get('phone');
@@ -87,6 +108,9 @@ def submit_register():
     'uname' : uname,
     'pws' : pws,
     'type' : radio,
+    })
+    db.insert('images',{
+    'image':img,
     })
     query = db.query("Select id from individuals where uname = $1",uname).namedresult()[0];
     if radio == 'kid':

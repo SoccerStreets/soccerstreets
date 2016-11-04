@@ -18,7 +18,7 @@
     </div>
 
     <div class="container-fluid">
-      <form action="/submit_register" method="POST">
+      <form enctype="multipart/form-data" action="/submit_register" method="POST">
 
         <label><b>I am a: </b></label>
 
@@ -61,6 +61,11 @@
 
           <!-- <label><b>Password</b></label> -->
           <input type="password" placeholder="Password" name="pws" required>
+
+          <!-- Image Upload: -->
+          <label><b>Upload Image</b></label>
+          <input type="file" name="file"><br /><br />
+
 
           <button type="submit">Register</button>
         </div>
