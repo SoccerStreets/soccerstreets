@@ -214,4 +214,5 @@ def upload():
         return redirect('/')
 
 if __name__ == '__main__':
+    app.config['TEMPLATE_AUTO_RELOAD'] = True
     app.run(debug=True)
