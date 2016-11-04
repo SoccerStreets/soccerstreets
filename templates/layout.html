@@ -11,39 +11,43 @@
 </head>
 
 {% block main %}
-
-    <div class="topnav">
-
-    </div>
-
-    <div class="bottom-buttons">
-
-    </div>
-
-    <!-- {% if session['username'] %}
-    <h4>Hello {{session['username']}}!</h4>
-    <form class="form" action="/log_out" method="post">
-        <div class="form-group">
-            <button class="nr-btn fl left-btn" type="submit" action="/log_out" name="log_out">Log Out</button>
-        </div>
-    </form>
-    {% else %}
-    <h4>Hello!</h4> {% endif %}
-
     <body>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <div class="toFade">
-                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <h4>{{message}}</h4>
-                </div>
-            {% endif %}
-        {% endwith %}
-        {% block body %}
-        {% endblock %}
-    </body> -->
+        <div class="topnav">
+            <img src="/static/img/Trip-Goalie-Logo.png" alt="" />
+            <a href="#">&#9776;</a>
+        </div>
+        <div class="main-content">
+            {% block body %}
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="toFade">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <h4>{{message}}</h4>
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            {% endblock %}
+        </div>
+        <div class="bottom-buttons">
+            {% block buttons %}
+            <a class="cancel" href="/">Cancel</a>
+            <a class="submit-register" href="/register">Submit</a>
+            {% endblock %}
+        </div>
+    </body>
 {% endblock %}
 
 <script src="static/js/jquery-1.12.0.js"></script>
 
 </html>
+
+<!-- OLD CODE -->
+<!-- {% if session['username'] %}
+<h4>Hello {{session['username']}}!</h4>
+<form class="form" action="/log_out" method="post">
+    <div class="form-group">
+        <button class="nr-btn fl left-btn" type="submit" action="/log_out" name="log_out">Log Out</button>
+    </div>
+</form>
+{% else %}
+<h4>Hello!</h4> {% endif %} -->

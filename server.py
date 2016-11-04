@@ -141,34 +141,7 @@ def submit_register():
         })
         return redirect('/'+ radio + '/' + str(query.id))
 
-
-@app.route('/logout')
-def logout():
-    del session['username']
-    flash("Successfully Logged Out")
-    return redirect('/')
-
-
-@app.route('/chap_checkin_submit', methods=['POST'])
-def checkin():
-    kid_id = request.form.get('kid_id');
-    timestamp = time.time();
-    origin_id = request.form.get('origin_id');
-    destination_id = request.form.get('destination_id')
-    chaperone_id = request.form.get('chaperone_id')
-    r = requests.post('https://intense-shore-33606.herokuapp.com/api/v1/checkins', data={'participant_id':kid_id, 'timestamp': timestamp, 'chaperone_id': chaperone_id, 'origin_id':origin_id, 'destination_id': destination_id})
-    flash("Checkin Success")
-    return redirect ('/chaperone/' + chaperone_id)
-
-@app.route('/checkin5', methods=['POST'])
-def checkin5():
-    query = db.query("")
-    return redirect('/login')
-
-@app.route('/checkout', methods=['POST'])
-def checkout():
-    return redirect('/login')
-
+# Renders Individual User Page for KIDS
 @app.route('/parent/<parent_id>')
 def render_parent(parent_id):
     # Query to get parent information
@@ -184,14 +157,15 @@ def render_parent(parent_id):
         kids_list = kids_list
     )
 
-
-
+# Renders Individual User Page for KIDS
 @app.route('/kid/<kid_id>')
 def render_kid(kid_id):
     return render_template(
         'kid.html',
     )
 
+
+# Renders Individual User Page for CHAPERONES
 @app.route('/chaperone/<chaperone_id>')
 def render_chaperone(chaperone_id):
     # Query to get chaperone information
@@ -209,6 +183,16 @@ def render_chaperone(chaperone_id):
         query2 = query2
 )
 
+@app.route('/chap_checkin_submit', methods=['POST'])
+def checkin():
+    kid_id = request.form.get('kid_id');
+    timestamp = time.time();
+    origin_id = request.form.get('origin_id');
+    destination_id = request.form.get('destination_id')
+    chaperone_id = request.form.get('chaperone_id')
+    r = requests.post('https://intense-shore-33606.herokuapp.com/api/v1/checkins', data={'participant_id':kid_id, 'timestamp': timestamp, 'chaperone_id': chaperone_id, 'origin_id':origin_id, 'destination_id': destination_id})
+    flash("Checkin Success")
+    return redirect ('/chaperone/' + chaperone_id)
 
 @app.route('/upload', methods=['POST'])
 def upload():

@@ -12,6 +12,7 @@ body {
 .logoBackground {
     /*border: 4px solid red;*/
     background-image: url('/static/img/homepage_bg.jpg');
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,23 +69,24 @@ body {
 
 /*Login and Register Homepage Buttons*/
 .topnav {
-    border: 4px solid orange;
+    /*border: 4px solid orange;*/
     background-color: #2e2e2e;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-left: 5%;
     padding-right: 5%;
-    height: 10%;
+    height: 11%;
 }
 
 .topnav img {
-    border: 4px solid green;
-    width: 50%;
+    /*border: 4px solid green;*/
+    width: 60%;
 }
 
 .topnav a {
-
+    color: #ffc000;
+    font-size: 2.7em;
 }
 
 .main-content {
@@ -92,10 +94,9 @@ body {
 }
 
 .bottom-buttons {
-    background-color: #0077ff;
     display: flex;
     align-items: center;
-    height: 10%;
+    height: 9%;
 }
 
 .bottom-buttons a {
@@ -108,6 +109,18 @@ body {
     text-transform: uppercase;
     width: 50%;
     height: 100%;
+}
+
+.bottom-buttons a:hover {
+    text-decoration: none;
+}
+
+.cancel {
+    background-color: #ffc000;
+}
+
+.submit-register {
+    background-color: #0077ff;
 }
 /*************************************/
 
