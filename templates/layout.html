@@ -29,8 +29,10 @@
             {% endblock %}
         </div>
         <div class="bottom-buttons">
+            {% block buttons %}
             <a class="cancel" href="/">Cancel</a>
             <a class="submit-register" href="/register">Submit</a>
+            {% endblock %}
         </div>
     </body>
 {% endblock %}
