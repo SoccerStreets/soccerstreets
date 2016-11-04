@@ -1,16 +1,17 @@
-
 body {
     text-align: center;
 }
 
 /*Login and Sign Up Homepage Buttons*/
 .logoBackground {
-    background-color: red;
+    background-color: black;
 }
 
 .homepage-link-div {
-    background-color: blue;
+    background-color: red;;
+    height: 20%;
 }
+/*************************************/
 
 .header {
     margin-bottom: 25px;
