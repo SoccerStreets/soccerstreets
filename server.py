@@ -11,7 +11,7 @@ load_dotenv(find_dotenv())
 tmp_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 
 app = Flask('SoccerStreets',template_folder=tmp_dir)
-QRcode(app)
+# QRcode(app)
 app.secret_key = "ksajoivnvaldksdjfj"
 db = pg.DB(
     dbname=os.environ.get('PG_DBNAME'),
@@ -24,7 +24,6 @@ db = pg.DB(
 def render_homepage():
     return render_template(
         'homepage.html'
-
             )
 
 @app.route('/submit_login', methods=['POST'])
@@ -216,5 +215,4 @@ def upload():
         return redirect('/')
 
 if __name__ == '__main__':
-    app.config['TEMPLATE_AUTO_RELOAD'] = True
     app.run(debug=True)
