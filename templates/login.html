@@ -1,17 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block main %}
-    <body>
-        <div class="topnav">
-            <img src="/static/img/Trip-Goalie-Logo.png" alt="" />
-            <a href="#">&#9776;</a>
-        </div>
-        <div class="main-content">
-
-        </div>
-        <div class="bottom-buttons">
-            <a class="cancel" href="/">Cancel</a>
-            <a class="submit-register" href="/register">Submit</a>
-        </div>
-    </body>
+{% block buttons %}
+    <a class="cancel" href="/">Cancel</a>
+    <a class="submit-register" href="/register">Submit</a>
 {% endblock %}

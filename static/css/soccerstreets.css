@@ -111,6 +111,10 @@ body {
     height: 100%;
 }
 
+.bottom-buttons a:hover {
+    text-decoration: none;
+}
+
 .cancel {
     background-color: #ffc000;
 }
