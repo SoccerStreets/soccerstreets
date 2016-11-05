@@ -117,7 +117,7 @@ def submit_register():
         })
         return redirect('/'+ radio + '/' + str(query.id))
 
-# Renders Individual User Page for KIDS
+# Renders Individual User Page for PARENTS
 @app.route('/parent/<parent_id>')
 def render_parent(parent_id):
     # Query to get parent information
@@ -139,7 +139,6 @@ def render_kid(kid_id):
     return render_template(
         'kid.html',
     )
-
 
 # Renders Individual User Page for CHAPERONES
 @app.route('/chaperone/<chaperone_id>')
