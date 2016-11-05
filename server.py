@@ -42,12 +42,16 @@ def render_register():
         query = query,
     )
 
+# Executed from press of "login" button on login page
+# Redirects to user page if valid user, otherwise redirects to home
 @app.route('/submit_login', methods=['POST'])
 def submit_login():
     uname = request.form.get('uname')
     pws = request.form.get('pws')
+    print uname
+    print pws
     results = db.query("select * from individuals where uname = $1", uname).namedresult()
-    print results[0]
+    print results
     if len(results) > 0:
         user = results[0]
         if user.pws == pws and user.uname == uname:
@@ -57,7 +61,7 @@ def submit_login():
             session['lastname'] = user.lastname
             flash("Successfully Logged In")
             return redirect('/'+ user.type + '/' + str(user.id))
-        flash("Couldn't Log In")
+        # flash("Couldn't Log In")
     return redirect('/')
 
 @app.route('/log_out', methods=['POST'])

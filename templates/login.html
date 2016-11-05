@@ -1,6 +1,23 @@
 {% extends 'layout.html' %}
 
+{% block body%}
+<div class="main-content login">
+    <form name="login-form" id="login-form" class="form-horizontal login-form" action="/submit_login" method="post">
+        <div class="form-group">
+            <label class="control-label"><b>Username</b></label>
+            <input class="form-control" type="text" placeholder="Enter Username" name="uname" required>
+        </div>
+        <div class="form-group">
+            <label class="control-label"><b>Password</b></label>
+            <input class="form-control" type="password" placeholder="Enter Password" name="pws" required>
+        </div>
+        <a href="/register">Need an account? Sign Up!</a>
+        <input type="submit" name="other" value="submit" style="display:none;" />
+    </form>
+</div>
+{% endblock %}
+
 {% block buttons %}
     <a class="cancel" href="/">Cancel</a>
-    <a class="submit-register" href="/register">Submit</a>
+    <a id="submit-login" class="submit-login" href="#" onclick="document.forms['login-form'].submit();return false">Login</a>
 {% endblock %}
