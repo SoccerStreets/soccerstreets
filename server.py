@@ -1,4 +1,5 @@
 from flask import Flask, redirect, render_template, request, session, flash, url_for, send_from_directory
+from base64 import b64encode
 # from flask.ext.qrcode import QRcode
 import markdown
 from werkzeug import secure_filename
@@ -23,9 +24,11 @@ db = pg.DB(
 )
 
 #code for file upload
-
-app.config['UPLOAD_FOLDER'] = 'uploads/'
-app.config['ALLOWED_EXTENSIONS'] = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+APP_ROOT = os.path.abspath(os.path.dirname(__file__))
+UPLOAD_FOLDER = os.path.join(APP_ROOT,'static/uploads')
+# UPLOAD_FOLDER = 'Users/keyur/DigitalCrafts/marta/soccerstreets/static/uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['ALLOWED_EXTENSIONS'] = set(['png', 'jpg', 'jpeg', 'gif'])
 
 
 #for a given file determine whether it's an allowed type or not
@@ -90,7 +93,15 @@ def submit_register():
     file = request.files['file']
     # Check if the file is one of the allowed types/extensions
     if file and allowed_file(file.filename):
-        img = file.read();
+        filename = secure_filename(file.filename)
+
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        random_name = os.urandom(5).encode('hex')
+        new_name = random_name+'.jpg'
+        old_file = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        new_file = os.path.join(app.config['UPLOAD_FOLDER'], new_name)
+        os.rename(old_file,new_file)
 
     fname = request.form.get('fname');
     lname = request.form.get('lname');
@@ -109,10 +120,14 @@ def submit_register():
     'pws' : pws,
     'type' : radio,
     })
-    db.insert('images',{
-    'image':img,
-    })
     query = db.query("Select id from individuals where uname = $1",uname).namedresult()[0];
+
+
+    db.insert('images',{
+    'image' : new_name,
+    'indiv_id' : query.id,
+    })
+
     if radio == 'kid':
         db.insert('kids_breeze',{
         'kid_id' : query.id,
@@ -150,10 +165,13 @@ def render_parent(parent_id):
     # Query to get all the parent's kids
     kids_list = db.query("select kids.id as kid_id, kids.firstname as kid_fname, kids.lastname as kid_lname from individuals as parents inner join kids_parents on parents.id = kids_parents.parent_id inner join individuals as kids on kids_parents.kid_id = kids.id where parents.id = $1", parent_id).namedresult()
 
+    image = db.query("select image from images where indiv_id = $1", parent_id).namedresult()[0].image;
+
     return render_template(
         'parent.html',
         parent_id = parent_id,
         parent = parent,
+        image = image,
         kids_list = kids_list
     )
 
