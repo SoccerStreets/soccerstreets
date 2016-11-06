@@ -1,5 +1,28 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-    <div class="name">{{session['firstname']}} {{session['lastname']}}</div>
+    <div class="main-content chaperone">
+        <h1 class="session-type">{{session['type']}}</h1>
+        <div class="profile well">
+            <div class="profile-summary">
+                <div class="name">
+                    <span class="bold">Name: </span>
+                    <span>{{session['firstname']}} {{session['lastname']}}</span>
+                </div>
+                <div class="phone">
+                    <span class="bold">Phone: </span>
+                    <span>{{session['phone']}}</span>
+                </div>
+                <a class="edit-profile" href="/edit_profile"><button class="btn btn-default" type="button" name="button">Edit Profile</button></a>
+            </div>
+            <div class="avatar">
+                <img src="/static/img/homepage_bg.jpg" alt="" />
+            </div>
+        </div>
+        <h1>Current Kids</h1>
+    </div>
+{% endblock %}
+
+{% block buttons %}
+    <a class="checkin-button" href="/">Check-in Kid</a>
 {% endblock %}

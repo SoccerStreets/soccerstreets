@@ -96,15 +96,17 @@ a:hover {
 .main-content {
     /*border: 4px solid purple;*/
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 5% 10% 5% 10%;
+    padding: 5% 5% 5% 5%;
     height: 80%;
 }
 
 .bottom-buttons {
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 9%;
 }
 
@@ -125,7 +127,7 @@ a:hover {
 }
 /*************************************/
 
-/*Page Template*/
+/***********Page Template*************/
 .login-form {
     /*border: 4px solid red;*/
     display: flex;
@@ -165,6 +167,53 @@ a:hover {
 }
 /*************************************/
 
+/***********Chaperone Page*************/
+.chaperone {
+    justify-content: flex-start;
+}
+
+.chaperone h1 {
+    text-transform: uppercase;
+    font-size: 1.75em;
+    color: #0077ff;
+}
+
+.profile {
+    border: 4px solid green;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 3% 2% 3% 4%;
+}
+
+.profile-summary {
+    border: 4px solid yellow;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.edit-profile {
+    margin-top: 10px;
+}
+
+.avatar {
+    border: 4px solid purple;
+}
+
+.avatar img {
+    /*border: 4px solid red;*/
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.checkin-button {
+    /*border: 4px solid blue;*/
+    background-color: #ffc000;
+    width: 100% !important;
+}
 
 /* Full-width inputs */
 /*input[type=text], input[type=password] {
