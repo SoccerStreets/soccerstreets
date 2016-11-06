@@ -67,17 +67,16 @@ def render_register():
 def submit_login():
     uname = request.form.get('uname')
     pws = request.form.get('pws')
-    print uname
-    print pws
-    results = db.query("select * from individuals where uname = $1", uname).namedresult()
-    print results
-    if len(results) > 0:
-        user = results[0]
+    user_list = db.query("select i.id as id, i.firstname as fname, i.lastname as lname, i.uname as uname, i.pws as pws, i.type as type, phonenums.phone as phone from individuals as i inner join phonenums on i.id = phonenums.individ_id where uname = $1", uname).namedresult()
+    if len(user_list) > 0:
+        user = user_list[0]
         if user.pws == pws and user.uname == uname:
             session['id'] = user.id
             session['username'] = user.uname
-            session['firstname'] = user.firstname
-            session['lastname'] = user.lastname
+            session['firstname'] = user.fname
+            session['lastname'] = user.lname
+            session['phone'] = user.phone
+            session['type'] = user.type
             flash("Successfully Logged In")
             return redirect('/'+ user.type + '/' + str(user.id))
         # flash("Couldn't Log In")
