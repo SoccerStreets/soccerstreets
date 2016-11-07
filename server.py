@@ -49,9 +49,12 @@ def render_homepage():
 # Renders Login page (login form)
 @app.route('/login')
 def render_login():
-    return render_template(
-        'login.html'
-            )
+    if 'id' in session:
+        return redirect('/'+ session['type'] + '/' + str(session['id']))
+    else:
+        return render_template(
+            'login.html'
+                )
 
 # Renders Login page (login form)
 @app.route('/register')
@@ -78,19 +81,21 @@ def submit_login():
             session['lastname'] = user.lname
             session['phone'] = user.phone
             session['type'] = user.type
-            flash("Successfully Logged In")
             return redirect('/'+ user.type + '/' + str(user.id))
-        # flash("Couldn't Log In")
-    return redirect('/')
+    else:
+        flash("Invalid username or password")
+        return redirect('/login')
 
-@app.route('/log_out', methods=['POST'])
+@app.route('/log_out')
 def log_out():
-   del session['id']
-   del session['username']
-   del session['firstname']
-   del session['lastname']
-   flash("Successfully Logged Out")
-   return redirect('/')
+    del session['id']
+    del session['username']
+    del session['firstname']
+    del session['lastname']
+    del session['phone']
+    del session['type']
+    flash("Successfully Logged Out")
+    return redirect('/login')
 
 @app.route('/submit_register', methods=['POST'])
 def submit_register():
