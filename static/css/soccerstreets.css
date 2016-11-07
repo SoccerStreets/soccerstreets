@@ -125,6 +125,65 @@ a:hover {
 .bottom-buttons a:hover {
     text-decoration: none;
 }
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #2e2e2e;
+    overflow-x: hidden;
+    padding-top: 15%;
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+    display: flex;
+    flex-direction: column;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+.sidenav .yellow {
+    width: 100%;
+    background-color: #ffc000;
+    color: #2e2e2e;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    color: #0096ff;
+}
+
+.sidenav .about {
+    color: white;
+    margin-top: auto;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidenav .about img {
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.sidenav .loggedin {
+    color: #0096ff;
+}
 /*************************************/
 
 /***********Page Template*************/
@@ -160,10 +219,15 @@ a:hover {
 
 .cancel {
     background-color: #ffc000;
+    color: #2e2e2e;
 }
 
 .submit-login {
     background-color: #0077ff;
+}
+
+.login-fail {
+    color: red;
 }
 /*************************************/
 
@@ -179,7 +243,7 @@ a:hover {
 }
 
 .profile {
-    border: 4px solid green;
+    /*border: 4px solid green;*/
     display: flex;
     align-items: center;
     width: 100%;
@@ -187,7 +251,7 @@ a:hover {
 }
 
 .profile-summary {
-    border: 4px solid yellow;
+    /*border: 4px solid yellow;*/
     display: flex;
     flex-direction: column;
     width: 70%;
@@ -198,11 +262,12 @@ a:hover {
 }
 
 .avatar {
-    border: 4px solid purple;
+    /*border: 4px solid purple;*/
 }
 
 .avatar img {
     /*border: 4px solid red;*/
+    width: 90px;
 }
 
 .bold {
@@ -212,6 +277,7 @@ a:hover {
 .checkin-button {
     /*border: 4px solid blue;*/
     background-color: #ffc000;
+    color: #2e2e2e;
     width: 100% !important;
 }
 

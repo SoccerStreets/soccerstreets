@@ -49,9 +49,12 @@ def render_homepage():
 # Renders Login page (login form)
 @app.route('/login')
 def render_login():
-    return render_template(
-        'login.html'
-            )
+    if 'id' in session:
+        return redirect('/'+ session['type'] + '/' + str(session['id']))
+    else:
+        return render_template(
+            'login.html'
+                )
 
 # Renders Login page (login form)
 @app.route('/register')
@@ -78,19 +81,21 @@ def submit_login():
             session['lastname'] = user.lname
             session['phone'] = user.phone
             session['type'] = user.type
-            flash("Successfully Logged In")
             return redirect('/'+ user.type + '/' + str(user.id))
-        # flash("Couldn't Log In")
-    return redirect('/')
+    else:
+        flash("Invalid username or password")
+        return redirect('/login')
 
-@app.route('/log_out', methods=['POST'])
+@app.route('/log_out')
 def log_out():
-   del session['id']
-   del session['username']
-   del session['firstname']
-   del session['lastname']
-   flash("Successfully Logged Out")
-   return redirect('/')
+    del session['id']
+    del session['username']
+    del session['firstname']
+    del session['lastname']
+    del session['phone']
+    del session['type']
+    flash("Successfully Logged Out")
+    return redirect('/login')
 
 @app.route('/submit_register', methods=['POST'])
 def submit_register():
@@ -194,21 +199,17 @@ def render_kid(kid_id):
 # Renders Individual User Page for CHAPERONES
 @app.route('/chaperone/<chaperone_id>')
 def render_chaperone(chaperone_id):
-    # Query to get chaperone information
-    chaperone = db.query("select distinct on(f_name) individuals.firstname as f_name, phonenums.phone as phone_num from individuals inner join phonenums on individuals.id = phonenums.individ_id where individuals.id = $1", chaperone_id).namedresult()[0]
-    query1 = db.query("Select * from stations").namedresult();
-    # #Query to get chaperone photo
-    image = db.query("select image from images where indiv_id = $1", parent_id).namedresult()[0].image;
+    #Query to get chaperone photo
+    image = db.query("select image from images where indiv_id = $1", chaperone_id).namedresult()[0].image;
+    # Query to get kids currently under chaperone supervision
+    kids_list = db.query(
+        "select kids.firstname as kid_fname, kids.lastname as kid_lname, phonenums.phone as parent_phone, parents.firstname as pfname, images.image as kid_image from individuals as chaperones inner join checkins on chaperones.id = checkins.chaperone_id inner join individuals as kids on checkins.kid_id = kids.id inner join kids_parents on kids.id = kids_parents.kid_id inner join individuals as parents on kids_parents.parent_id = parents.id inner join phonenums on parents.id = phonenums.individ_id inner join images on images.indiv_id = kids.id where checkins.timestamp >= NOW() - '1 day'::INTERVAL;").namedresult()
 
-    query2 = db.query("select kids.firstname as kid_fname, kids.lastname as kid_lname, phonenums.phone as parent_phone, parents.firstname as pfname from individuals as chaperones inner join checkins on chaperones.id = checkins.chaperone_id inner join individuals as kids on checkins.kid_id = kids.id  inner join kids_parents on kids.id = kids_parents.kid_id inner join individuals as parents on kids_parents.parent_id = parents.id inner join phonenums on parents.id = phonenums.individ_id where checkins.timestamp >= NOW() - '1 hour'::INTERVAL;").namedresult()
-    print query2
     return render_template(
         'chaperone.html',
-        phone = chaperone.phone_num,
-        query1 = query1,
-        query2 = query2,
-        image = image
-)
+        kids_list = kids_list,
+        chaperone_image = image
+        )
 
 @app.route('/chap_checkin_submit', methods=['POST'])
 def checkin():

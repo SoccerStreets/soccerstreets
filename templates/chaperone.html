@@ -16,13 +16,34 @@
                 <a class="edit-profile" href="/edit_profile"><button class="btn btn-default" type="button" name="button">Edit Profile</button></a>
             </div>
             <div class="avatar">
-                <img src="/static/img/homepage_bg.jpg" alt="" />
+                <img src="/static/img/{{chaperone_image}}" alt="" />
             </div>
         </div>
         <h1>Current Kids</h1>
+        {% for kid in kids_list %}
+            <div class="profile well">
+                <div class="profile-summary">
+                    <div class="name">
+                        <span class="bold">Name: </span>
+                        <span>{{kid.kid_fname}}  {{kid.kid_lname}}</span>
+                    </div>
+                    <a href="tel:{{kid.parent_phone}}">Call {{kid.kid_fname}}</a>
+                    <a href="tel:{{kid.parent_phone}}">Call Parent</a>
+                </div>
+                <div class="avatar">
+                    <img src="/static/img/{{kid.kid_image}}" alt="" />
+                </div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
 
 {% block buttons %}
     <a class="checkin-button" href="/">Check-in Kid</a>
+{% endblock %}
+
+{% block sidenav %}
+<a href="#"></a>
+<a href="http://www.soccerstreets.org/">Soccer in the Streets</a>
+<a class="yellow" href="/log_out">Log Out</a>
 {% endblock %}
