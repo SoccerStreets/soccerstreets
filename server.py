@@ -33,7 +33,6 @@ app.config['ALLOWED_EXTENSIONS'] = set(['png', 'jpg', 'jpeg', 'gif'])
 
 
 #for a given file determine whether it's an allowed type or not
-
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
@@ -50,13 +49,14 @@ def render_homepage():
 @app.route('/login')
 def render_login():
     if 'id' in session:
+        #if already loggedin, redirect to user page
         return redirect('/'+ session['type'] + '/' + str(session['id']))
     else:
         return render_template(
             'login.html'
                 )
 
-# Renders Login page (login form)
+# Renders Registration page (registration form)
 @app.route('/register')
 def render_register():
     query = db.query('Select * from stations').namedresult();
@@ -86,6 +86,7 @@ def submit_login():
         flash("Invalid username or password")
         return redirect('/login')
 
+#Logs user out of site and redirects to login page
 @app.route('/log_out')
 def log_out():
     del session['id']
@@ -192,8 +193,28 @@ def render_parent(parent_id):
 # Renders Individual User Page for KIDS
 @app.route('/kid/<kid_id>')
 def render_kid(kid_id):
+    # Query to get latest checkin for kid
+    current_trip = db.query('select chaperones.id as chap_id, chaperones.firstname as chap_fname, chaperones.lastname as chap_lname, phonenums.phone as chap_phone, checkins.origin_id as origin, checkins.dest_id as destination, checkins.action as action from checkins inner join individuals as chaperones on checkins.chaperone_id = chaperones.id inner join phonenums on chaperones.id = phonenums.individ_id where checkins.kid_id = $1 order by checkins.timestamp limit 1', kid_id).namedresult()[0]
+    # Query to get origin station for current_trip
+    origin = db.query('select * from stations where stations.id = $1', current_trip.origin).namedresult()[0]
+    # Query to get origin station for current_trip
+    destination = db.query('select * from stations where stations.id = $1', current_trip.destination).namedresult()[0]
+    # Query to get kid's parent info
+    parent = db.query('select parents.id as parent_id, parents.firstname as parent_fname, parents.lastname as parent_lname, phonenums.phone as parent_phone from individuals as kids inner join kids_parents on kids.id = kids_parents.kid_id inner join individuals as parents on kids_parents.parent_id = parents.id inner join phonenums on parents.id = phonenums.individ_id where kids.id = $1', kid_id).namedresult()[0]
+    #Queries to get images for kid, their parent, and the chaperone of their current trip
+    kid_image = db.query("select image from images where indiv_id = $1", kid_id).namedresult()[0].image;
+    parent_image = db.query("select image from images where indiv_id = $1", parent.parent_id).namedresult()[0].image;
+    chaperone_image = db.query("select image from images where indiv_id = $1", current_trip.chap_id).namedresult()[0].image;
+
     return render_template(
         'kid.html',
+        current_trip = current_trip,
+        origin = origin,
+        destination = destination,
+        parent = parent,
+        kid_image = kid_image,
+        parent_image = parent_image,
+        chaperone_image = chaperone_image
     )
 
 # Renders Individual User Page for CHAPERONES

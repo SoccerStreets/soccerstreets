@@ -186,7 +186,7 @@ a:hover {
 }
 /*************************************/
 
-/***********Page Template*************/
+/***********Login & Page Template*************/
 .login-form {
     /*border: 4px solid red;*/
     display: flex;
@@ -231,12 +231,16 @@ a:hover {
 }
 /*************************************/
 
-/***********Chaperone Page*************/
-.chaperone {
+/**************Register Page***************/
+
+/*************************************/
+
+/**************Kid Page***************/
+.kid {
     justify-content: flex-start;
 }
 
-.chaperone h1 {
+.kid h1 {
     text-transform: uppercase;
     font-size: 1.75em;
     color: #0077ff;
@@ -247,7 +251,7 @@ a:hover {
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 3% 2% 3% 4%;
+    padding: 4% 4% 4% 4%;
 }
 
 .profile-summary {
@@ -274,12 +278,49 @@ a:hover {
     font-weight: bold;
 }
 
-.checkin-button {
-    /*border: 4px solid blue;*/
+.trip-type {
+    color: #0096ff;
+}
+
+.call_parent {
     background-color: #ffc000;
+    color: white;
+}
+
+.call_chaperone {
+    background-color: #0096ff;
+    color: white;
+}
+
+.qr-button {
+    /*border: 4px solid blue;*/
+    background-color: #0096ff;
     color: #2e2e2e;
     width: 100% !important;
 }
+/*************************************/
+
+/**************Parent Page***************/
+
+/*************************************/
+
+/***********Chaperone Page*************/
+.chaperone {
+    justify-content: flex-start;
+}
+
+.chaperone h1 {
+    text-transform: uppercase;
+    font-size: 1.75em;
+    color: #0077ff;
+}
+
+.checkin-button {
+    /*border: 4px solid blue;*/
+    background-color: #ffc000;
+    width: 100% !important;
+}
+/*************************************/
 
 /* Full-width inputs */
 /*input[type=text], input[type=password] {

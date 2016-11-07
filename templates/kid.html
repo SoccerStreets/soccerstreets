@@ -1,26 +1,72 @@
-
 {% extends 'layout.html' %}
 
-     {% block body %}
-    <div class="header">
-      <h1>Trip Goalies</h1>
+{% block body %}
+    <div class="main-content kid">
+        <div class="profile well">
+            <div class="profile-summary">
+                <div class="name">
+                    <span class="bold">Name: </span>
+                    <span>{{session['firstname']}} {{session['lastname']}}</span>
+                </div>
+                <div class="phone">
+                    <span class="bold">Phone: </span>
+                    <span>{{session['phone']}}</span>
+                </div>
+            </div>
+            <div class="avatar">
+                <img src="/static/img/{{kid_image}}" alt="" />
+            </div>
+        </div>
+        <!-- <div class="qrcode">
+            <img src="/static/img/{{parent_image}}" alt="" />
+        </div> -->
+        <div class="profile well">
+            <div class="profile-summary">
+                <div class="name">
+                    <span class="bold">Parent: </span>
+                    <span>{{parent.parent_fname}} {{parent.parent_lname}}</span>
+                </div>
+                <div class="phone">
+                    <span class="bold">Phone: </span>
+                    <span>{{parent.parent_phone}}</span>
+                </div>
+                <a href="tel:{{parent.parent_phone}}"><button class="btn call_parent" type="button" name="button">Call Parent</button></a>
+            </div>
+            <div class="avatar">
+                <img src="/static/img/{{parent_image}}" alt="" />
+            </div>
+        </div>
+
+        <h1>Current Trip</h1>
+        <div class="profile well">
+            <div class="profile-summary">
+                <h4 class="trip-type">{{current_trip.action}}</h4>
+                <div class="orig">
+                    <span class="bold">Origin: </span>
+                    <span>{{current_trip.origin}}</span>
+                </div>
+                <div class="dest">
+                    <span class="bold">Destination: </span>
+                    <span>{{current_trip.destination}}</span>
+                </div>
+                <div class="name">
+                    <span class="bold">Chaperone: </span>
+                    <span>{{current_trip.chap_fname}} {{current_trip.chap_lname}}</span>
+                </div>
+                <a href="tel:{{parent.parent_phone}}"><button class="btn call_chaperone" type="button" name="button">Call {{current_trip.chap_fname}} {{current_trip.chap_lname}}</button></a>
+            </div>
+            <div class="avatar">
+                <img src="/static/img/{{chaperone_image}}" alt="" />
+            </div>
+        </div>
     </div>
+{% endblock %}
 
-    <div class="container-fluid" style="text-align:center">
-      <h4>Welcome {{session['firstname']}} {{session['lastname']}}</h4>
-      <h4>Present to Chaperone</h4>
-      <!-- <img class="qrcode" src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&size=100x100" alt="" title="" /> -->
-      <!-- <img src="{{ qrcode(session['id']|string) }}"> -->
-      <h4 id="name"></h4>
-      <input id="destInput" type="text" placeholder="Enter your destination e.g 'civic center station' " name="destination">
-      <button class = "btn-success">Geolocate</button>
-      <div class="arrival">
-        <h4 class="travTime">Travel Time</h4>
-      </div>
-   </div>
-   {% endblock %}
+{% block buttons %}
+    <a class="qr-button" href="/">QR Code</a>
+{% endblock %}
 
-
-
-  <!-- <script src="/static/js/jquery-1.12.0.js"></script>
-  <script type ="text/javascript" src ="/static/js/kid.js"></script> -->
+{% block sidenav %}
+<a href="http://www.soccerstreets.org/">Soccer in the Streets</a>
+<a class="yellow" href="/log_out">Log Out</a>
+{% endblock %}

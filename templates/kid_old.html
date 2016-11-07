@@ -1,0 +1,26 @@
+
+{% extends 'layout.html' %}
+
+    {% block body %}
+    <div class="header">
+      <h1>Trip Goalies</h1>
+    </div>
+
+    <div class="container-fluid" style="text-align:center">
+      <h4>Welcome {{session['firstname']}} {{session['lastname']}}</h4>
+      <h4>Present to Chaperone</h4>
+      <!-- <img class="qrcode" src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&size=100x100" alt="" title="" /> -->
+      <!-- <img src="{{ qrcode(session['id']|string) }}"> -->
+      <h4 id="name"></h4>
+      <input id="destInput" type="text" placeholder="Enter your destination e.g 'civic center station' " name="destination">
+      <button class = "btn-success">Geolocate</button>
+      <div class="arrival">
+        <h4 class="travTime">Travel Time</h4>
+      </div>
+   </div>
+   {% endblock %}
+
+
+
+  <!-- <script src="/static/js/jquery-1.12.0.js"></script>
+  <script type ="text/javascript" src ="/static/js/kid.js"></script> -->
