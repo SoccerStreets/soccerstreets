@@ -7,6 +7,7 @@ import pg
 import time
 from dotenv import load_dotenv, find_dotenv
 import os
+from PIL import Image
 # import requests
 
 
@@ -98,10 +99,15 @@ def submit_register():
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
 
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        im1 = Image.open(file)
 
-        random_name = os.urandom(5).encode('hex')
-        new_name = random_name+'.jpg'
+
+        im1.save(os.path.join(app.config['UPLOAD_FOLDER'], filename),quality=20)
+
+        random_name1 = os.urandom(6).encode('hex')
+        random_name2 = os.urandom(6).encode('hex')
+        random_name = random_name1+'_'+random_name2
+        new_name = random_name+'.jpeg'
         old_file = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         new_file = os.path.join(app.config['UPLOAD_FOLDER'], new_name)
         os.rename(old_file,new_file)
