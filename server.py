@@ -176,18 +176,40 @@ def submit_register():
 def render_parent(parent_id):
     # Query to get parent information
     parent = db.query('select individuals.firstname from individuals inner join phonenums on individuals.id = phonenums.individ_id where individuals.id = $1', parent_id).namedresult()[0]
+    parent_image = db.query("select image from images where indiv_id = $1", parent_id).namedresult()[0].image;
 
     # Query to get all the parent's kids
-    kids_list = db.query("select kids.id as kid_id, kids.firstname as kid_fname, kids.lastname as kid_lname from individuals as parents inner join kids_parents on parents.id = kids_parents.parent_id inner join individuals as kids on kids_parents.kid_id = kids.id where parents.id = $1", parent_id).namedresult()
+    kids_list = db.query("select kids.id as kid_id, kids.firstname as kid_fname, kids.lastname as kid_lname, phonenums.phone as kid_phone from individuals as parents inner join kids_parents on parents.id = kids_parents.parent_id inner join individuals as kids on kids_parents.kid_id = kids.id inner join phonenums on kids.id = phonenums.individ_id where parents.id = $1", parent_id).namedresult()
 
-    image = db.query("select image from images where indiv_id = $1", parent_id).namedresult()[0].image;
+    kids_trips = [];
+    for kid in kids_list:
+        try:
+            print "entered trip block"
+            # Query to get latest checkin for each kid
+            current_trip = db.query('select chaperones.id as chap_id, chaperones.firstname as chap_fname, chaperones.lastname as chap_lname, phonenums.phone as chap_phone, checkins.origin_id as origin, checkins.dest_id as destination, checkins.action as action from checkins inner join individuals as chaperones on checkins.chaperone_id = chaperones.id inner join phonenums on chaperones.id = phonenums.individ_id where checkins.kid_id = $1 order by checkins.timestamp limit 1', kid.kid_id).namedresult()[0]
+            # Query to get origin station for current_trip
+            origin = db.query('select * from stations where stations.id = $1', current_trip.origin).namedresult()[0]
+            # Query to get origin station for current_trip
+            destination = db.query('select * from stations where stations.id = $1', current_trip.destination).namedresult()[0]
+            #Queries to get images for the parent, each of their kids and the chaperone of their kid's current trip
+            kid_image = db.query("select image from images where indiv_id = $1", kid.kid_id).namedresult()[0].image;
+            chaperone_image = db.query("select image from images where indiv_id = $1", current_trip.chap_id).namedresult()[0].image;
+
+            #Append current trip, origin, and destination to kids_trips
+            kids_trips.append([current_trip, origin, destination, kid_image, chaperone_image])
+            print kids_trips
+        except:
+            kids_trips.append(['false'])
+
+    #Zip kids_list and kids_trips
+    kids_master = zip(kids_list, kids_trips)
 
     return render_template(
         'parent.html',
-        parent_id = parent_id,
+        # parent_id = parent_id,
         parent = parent,
-        image = image,
-        kids_list = kids_list
+        parent_image = parent_image,
+        kids_master = kids_master
     )
 
 # Renders Individual User Page for KIDS

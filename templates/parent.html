@@ -1,10 +1,73 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-<h3>Hello! {{parent.name}}</h3>
-<h1> Please note down your unique number : {{parent_id}}. <br>
-    It is very very essential for signing up your kids.</h1>
-    <img src="/static/uploads/{{image}}"/>
+    <div class="main-content kid">
+        <div class="profile well">
+            <div class="profile-summary">
+                <div class="name">
+                    <span class="bold">Name: </span>
+                    <span>{{session['firstname']}} {{session['lastname']}}</span>
+                </div>
+                <div class="phone">
+                    <span class="bold">Phone: </span>
+                    <span>{{session['phone']}}</span>
+                </div>
+                <a class="edit-profile" href="/edit_profile"><button class="btn btn-default" type="button" name="button">Edit Profile</button></a>
+            </div>
+            <div class="avatar">
+                <img src="/static/img/{{parent_image}}" alt="" />
+            </div>
+        </div>
 
+        {% for kid, kid_trip in kids_master%}
+        <h1>{{kid.kid_fname}} {{kid.kid_lname}}</h1>
+        <div class="profile column well">
+            <div class="kid-profile">
+                <div class="profile-summary">
+                    <!-- <div class="name">
+                        <span class="bold">Name: </span>
+                        <span>{{kid.kid_fname}} {{kid.kid_lname}}</span>
+                    </div> -->
+                    <a href="tel:{{kid.kid_phone}}"><button class="btn call_kid" type="button" name="button">Call {{kid.kid_fname}} {{kid.kid_lname}}</button></a>
+                </div>
+                <div class="avatar">
+                    <img src="/static/img/{{kid_trip[3]}}" alt="" />
+                </div>
+            </div>
+            {% if kid_trip[0] != 'false' %}
+            <h4 class="trip-type"><span style="color: black" class="bold">Status: </span>{{kid_trip[0].action}}</h4>
+            <div class="kid-profile">
+                <div class="profile-summary">
+                    <div class="orig">
+                        <span class="bold">Origin: </span>
+                        <span>{{kid_trip[1].name}}</span>
+                    </div>
+                    <div class="dest">
+                        <span class="bold">Destination: </span>
+                        <span>{{kid_trip[2].name}}</span>
+                    </div>
+                    <div class="name">
+                        <span class="bold">Chaperone: </span>
+                        <span>{{kid_trip[0].chap_fname}} {{kid_trip[0].chap_lname}}</span>
+                    </div>
+                    <a href="tel:{{parent.parent_phone}}"><button class="btn call_chaperone" type="button" name="button">Call {{kid_trip[0].chap_fname}} {{kid_trip[0].chap_lname}}</button></a>
+                </div>
+                <div class="avatar">
+                    <img src="/static/img/{{kid_trip[4]}}" alt="" />
+                </div>
+            </div>
+            {% else %}
+            <h4 class="trip-type">No Current Trip</h4>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
 
+{% block buttons %}
+{% endblock %}
+
+{% block sidenav %}
+<a href="http://www.soccerstreets.org/">Soccer in the Streets</a>
+<a class="yellow" href="/log_out">Log Out</a>
 {% endblock %}
