@@ -14,7 +14,7 @@
     <body>
         <div class="topnav">
             <img src="/static/img/Trip-Goalie-Logo.png" alt="" />
-            <a href="#">&#9776;</a>
+            <a onclick="openNav()" href="#">&#9776;</a>
         </div>
         {% block body %}
         <div class="main-content">
@@ -33,6 +33,13 @@
             {% endblock %}
         </div>
     </body>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+    </div>
 {% endblock %}
 
 <script src="static/js/jquery-1.12.0.js"></script>

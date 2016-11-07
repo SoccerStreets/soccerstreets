@@ -188,11 +188,17 @@ def render_kid(kid_id):
 # Renders Individual User Page for CHAPERONES
 @app.route('/chaperone/<chaperone_id>')
 def render_chaperone(chaperone_id):
-    kids_list = db.query("select kids.firstname as kid_fname, kids.lastname as kid_lname, phonenums.phone as parent_phone, parents.firstname as pfname from individuals as chaperones inner join checkins on chaperones.id = checkins.chaperone_id inner join individuals as kids on checkins.kid_id = kids.id  inner join kids_parents on kids.id = kids_parents.kid_id inner join individuals as parents on kids_parents.parent_id = parents.id inner join phonenums on parents.id = phonenums.individ_id where checkins.timestamp >= NOW() - '1 hour'::INTERVAL;").namedresult()
+    #Query to get chaperone photo
+    image = db.query("select image from images where indiv_id = $1", chaperone_id).namedresult()[0].image;
+    # Query to get kids currently under chaperone supervision
+    kids_list = db.query(
+        "select kids.firstname as kid_fname, kids.lastname as kid_lname, phonenums.phone as parent_phone, parents.firstname as pfname, images.image as kid_image from individuals as chaperones inner join checkins on chaperones.id = checkins.chaperone_id inner join individuals as kids on checkins.kid_id = kids.id inner join kids_parents on kids.id = kids_parents.kid_id inner join individuals as parents on kids_parents.parent_id = parents.id inner join phonenums on parents.id = phonenums.individ_id inner join images on images.indiv_id = kids.id where checkins.timestamp >= NOW() - '1 day'::INTERVAL;").namedresult()
+
     return render_template(
         'chaperone.html',
-        kids_list = kids_list
-)
+        kids_list = kids_list,
+        chaperone_image = image
+        )
 
 @app.route('/chap_checkin_submit', methods=['POST'])
 def checkin():
