@@ -104,10 +104,10 @@ a:hover {
 
 .main-content {
     /*border: 4px solid purple;*/
-    display: flex;
-    flex-direction: column;
+    /*display: flex;*/
+    /*flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center;*/
     padding: 5% 5% 5% 5%;
     height: 80%;
     overflow: scroll;
@@ -184,6 +184,8 @@ a:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    padding: 0 20px 0 20px;
 }
 
 .sidenav .about img {
@@ -197,6 +199,13 @@ a:hover {
 /*************************************/
 
 /**************Login Page*************/
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .login-form {
     /*border: 4px solid red;*/
     display: flex;
@@ -243,11 +252,55 @@ a:hover {
 
 /************Register Page************/
 
+.signup-form {
+    /*border: 4px solid red;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup-fields {
+    /*border: 4px solid green;*/
+    width: 100%;
+    display: none;
+    flex-direction: column;
+}
+
+.role-group {
+    text-align: center;
+}
+
+.role-label {
+    font-size: 2em;
+    color: #0096ff;
+}
+
+.signup-form input[type="text"],
+.signup-form input[type="password"] {
+    border: 1px solid #dadada;
+    background: #ebebeb;
+    padding: 5px 0 5px 10px;
+    border-radius: 3px;
+}
+
+.signup-form input[type="file"] {
+    /*border: 1px solid red;*/
+}
+
+.signup-form .form-group {
+    /*border: 4px solid blue;*/
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 5px 0 5px 0;
+}
+
+
 /*************************************/
 
 /**************Kid Page***************/
 .kid {
-    justify-content: flex-start;
+    /*justify-content: flex-start;*/
 }
 
 .kid h1 {

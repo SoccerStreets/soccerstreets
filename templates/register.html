@@ -1,83 +1,86 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>soccerstreets</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="static/css/soccerstreets.css">
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Quicksand" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
+{% extends 'layout.html' %}
 
+{% block body %}
 
-  <body>
-
-    <div class="header">
-      <h1>Trip Goalies</h1>
-    </div>
-
-    <div class="container-fluid">
-      <form enctype="multipart/form-data" action="/submit_register" method="POST">
-
-        <label><b>I am a: </b></label>
-
-        <label class="radio-inline">
-          <input style="font-size: 1.5em" type="radio" id="ChaperoneRadio" name="optradio" value="chaperone">Chaperone
-        </label>
-
-        <label class="radio-inline">
-          <input style="font-size: 1.5em" id="ParentRadio" type="radio" name="optradio" value="parent">Parent
-        </label>
-
-        <label class="radio-inline">
-          <input style="font-size: 1.5em" type="radio" name="optradio" value="kid">Kid
-        </label>
-
-        <div class="container">
-          <!-- <label><b>First Name</b></label> -->
-          <input type="text" placeholder="First Name" name="fname" required>
-
-          <!-- <label><b>Last Name</b></label> -->
-          <input type="text" placeholder="Last Name" name="lname" required>
-
-          <!-- <label><b>Phone Number</b></label> -->
-          <input type="text" placeholder="Phone Number" name="phone" required>
-
-          <label>Select your marta station</label>
-          <select name = "station_id" class="selectpicker" data-style="btn-primary">
-            {% for station in query %}
-            <option value="{{station.id}}">{{station.name}}</option>
-            {% endfor %}
-          </select>
-          <!-- <label class="Breeze"><b>Breeze card number</b></label> -->
-          <input class="Breeze" type="text" placeholder="Breeze Card Number" name="breeze" novalidate>
-
-          <input class="parentid" type="text" placeholder="Parent's ID (Your parent's received a text when they signed up)" name="parentid" novalidate>
-
-
-          <!-- <label><b>Username</b></label> -->
-          <input type="text" placeholder="Username" name="uname" required>
-
-          <!-- <label><b>Password</b></label> -->
-          <input type="password" placeholder="Password" name="pws" required>
-
-          <!-- Image Upload: -->
-          <label><b>Upload Image</b></label>
-          <input type="file" name="file"><br /><br />
-
-
-          <button type="submit">Register</button>
+<div class="main-content">
+    <form class="signup-form form-horizontal" action="/submit_register" method="POST">
+        <div class="form-group role-group">
+            <label class="control-label role-label">I am a:</label>
+            <div class="radio">
+                <label for="chaperone">
+                    <input id="ChaperoneRadio" type="radio" name="optradio" value="chaperone">Chaperone
+                </label>
+                <label for="chaperone">
+                    <input id="ParentRadio" type="radio" name="optradio" value="parent">Parent
+                </label>
+                <label for="chaperone">
+                    <input id="KidRadio" type="radio" name="optradio" value="parent">Kid
+                </label>
+            </div>
         </div>
 
-        <div class="container" style="background-color:#f1f1f1">
-          <button type="button" class="cancelbtn">Cancel</button>
+        <div class="signup-fields">
+            <div class="form-group parent-code">
+                <label for="parentid" class="control-label">Parent Sign Up Code</label>
+                <input class="parentid" type="text" placeholder="Parent Code" name="parentid" required>
+            </div>
+
+            <div class="form-group">
+                <label for="avatar" class="control-label">Profile Image</label>
+                <input type="file" name="file" required>
+            </div>
+
+            <div class="form-group">
+                <label for="fname" class="control-label">First Name: </label>
+                <input type="text" placeholder="First Name" name="fname" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lname" class="control-label">Last Name: </label>
+                <input type="text" placeholder="Last Name" name="lname" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone" class="control-label">Phone Number: </label>
+                <input type="text" placeholder="(XXX) XXX-XXXX" name="phone" required>
+            </div>
+
+            <div class="form-group marta-station">
+                <label for="station_id" class="control-label">Select your closest MARTA station</label>
+                <select name="station_id" class="from-control" data-style="btn-primary">
+                    {% for station in query %}
+                    <option value="{{station.id}}">{{station.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group breeze-card">
+                <label for="breeze" class="control-label">Breeze Card Number</label>
+                <input type="text" placeholder="Breeze Card Number" name="breeze" novalidate>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="form-group">
+                <label for="uname" class="control-label">Username:</label>
+                <input type="text" placeholder="Username" name="uname" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pws" class="control-label">Password:</label>
+                <input type="password" placeholder="password" name="pws" required>
+            </div>
         </div>
+    </form>
+</div>
 
-      </form>
-   </div>
+{% endblock %}
 
-  </body>
-  <script src="static/js/jquery-1.12.0.js"></script>
-  <script type ="text/javascript" src ="static/js/soccerstreets.js"></script>
-</html>
+{% block buttons %}
+    <a class="cancel" href="/">Cancel</a>
+    <a id="submit-login" class="submit-login" href="#" onclick="document.forms['signup-form'].submit();return false">Register</a>
+{% endblock %}
+
+{% block sidenav %}
+<a href="http://www.soccerstreets.org/">Soccer in the Streets</a>
+{% endblock %}

@@ -100,14 +100,13 @@ def log_out():
 
 @app.route('/submit_register', methods=['POST'])
 def submit_register():
+    print 'submitted registration form'
     file = request.files['file']
     # Check if the file is one of the allowed types/extensions
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
 
         im1 = Image.open(file)
-
-
         im1.save(os.path.join(app.config['UPLOAD_FOLDER'], filename),quality=20)
 
         random_name1 = os.urandom(6).encode('hex')
@@ -136,7 +135,6 @@ def submit_register():
     'type' : radio,
     })
     query = db.query("Select id from individuals where uname = $1",uname).namedresult()[0];
-
 
     db.insert('images',{
     'image' : new_name,
