@@ -43,4 +43,12 @@ $(document).ready(function() {
         console.log("fades");
     });
 
+    $('.qr-button').on('click', function() {
+        $('.qrcode-modal').css('display', 'flex');
+    });
+
+    $('.qr-close').on('click', function() {
+        $('.qrcode-modal').css('display', 'none');
+    });
+
 });

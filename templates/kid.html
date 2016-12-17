@@ -17,9 +17,7 @@
                 <img src="/static/uploads/{{kid_image}}" alt="" />
             </div>
         </div>
-        <div class="qrcode">
-            <img src="{{ qrcode(kid_id) }}">
-        </div>
+
         <div class="profile well">
             <div class="profile-summary">
                 <div class="name">
@@ -60,10 +58,24 @@
             </div>
         </div>
     </div>
+
+    <div class="qrcode-modal">
+        <div class="qr-close">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+        <div class="help-text">
+            Show this code to your chaperone
+        </div>
+        <div class="qrbox">
+            <img class="qrcode" src="{{qrcode(kid_id)}}">
+        </div>
+    </div>
 {% endblock %}
 
+
+
 {% block buttons %}
-    <a class="qr-button" href="/">QR Code</a>
+    <a class="qr-button">QR Code</a>
 {% endblock %}
 
 {% block sidenav %}
