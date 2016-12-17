@@ -3,7 +3,7 @@
 {% block body %}
 
 <div class="main-content">
-    <form class="signup-form form-horizontal" action="/submit_register" method="POST">
+    <form enctype="multipart/form-data" class="signup-form form-horizontal" name="signup-form" action="/submit_register" method="POST">
         <div class="form-group role-group">
             <label class="control-label role-label">I am a:</label>
             <div class="radio">
