@@ -15,7 +15,7 @@
                 <a class="edit-profile" href="/edit_profile"><button class="btn btn-default" type="button" name="button">Edit Profile</button></a>
             </div>
             <div class="avatar">
-                <img src="/static/img/{{parent_image}}" alt="" />
+                <img src="/static/uploads/{{parent_image}}" alt="" />
             </div>
         </div>
 
@@ -31,7 +31,7 @@
                     <a href="tel:{{kid.kid_phone}}"><button class="btn call_kid" type="button" name="button">Call {{kid.kid_fname}} {{kid.kid_lname}}</button></a>
                 </div>
                 <div class="avatar">
-                    <img src="/static/img/{{kid_trip[3]}}" alt="" />
+                    <img src="/static/uploads/{{kid_trip[3]}}" alt="" />
                 </div>
             </div>
             {% if kid_trip[0] != 'false' %}
@@ -53,7 +53,7 @@
                     <a href="tel:{{parent.parent_phone}}"><button class="btn call_chaperone" type="button" name="button">Call {{kid_trip[0].chap_fname}} {{kid_trip[0].chap_lname}}</button></a>
                 </div>
                 <div class="avatar">
-                    <img src="/static/img/{{kid_trip[4]}}" alt="" />
+                    <img src="/static/uploads/{{kid_trip[4]}}" alt="" />
                 </div>
             </div>
             {% else %}
