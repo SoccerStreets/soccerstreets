@@ -1,6 +1,6 @@
 from flask import Flask, redirect, render_template, request, session, flash, url_for, send_from_directory
 from base64 import b64encode
-# from flask.ext.qrcode import QRcode
+from flask_qrcode import QRcode
 import markdown
 from werkzeug import secure_filename
 import pg
@@ -15,7 +15,7 @@ from PIL import Image
 load_dotenv(find_dotenv())
 tmp_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask('SoccerStreets',template_folder=tmp_dir)
-# QRcode(app)
+QRcode(app)
 app.secret_key = "ksajoivnvaldksdjfj"
 db = pg.DB(
     dbname=os.environ.get('PG_DBNAME'),
@@ -222,12 +222,13 @@ def render_kid(kid_id):
     # Query to get kid's parent info
     parent = db.query('select parents.id as parent_id, parents.firstname as parent_fname, parents.lastname as parent_lname, phonenums.phone as parent_phone from individuals as kids inner join kids_parents on kids.id = kids_parents.kid_id inner join individuals as parents on kids_parents.parent_id = parents.id inner join phonenums on parents.id = phonenums.individ_id where kids.id = $1', kid_id).namedresult()[0]
     #Queries to get images for kid, their parent, and the chaperone of their current trip
-    kid_image = db.query("select image from images where indiv_id = $1", kid_id).namedresult()[0].image;
-    parent_image = db.query("select image from images where indiv_id = $1", parent.parent_id).namedresult()[0].image;
-    chaperone_image = db.query("select image from images where indiv_id = $1", current_trip.chap_id).namedresult()[0].image;
+    kid_image = db.query("select image from images where indiv_id = $1", kid_id).namedresult()[0].image
+    parent_image = db.query("select image from images where indiv_id = $1", parent.parent_id).namedresult()[0].image
+    chaperone_image = db.query("select image from images where indiv_id = $1", current_trip.chap_id).namedresult()[0].image
 
     return render_template(
         'kid.html',
+        kid_id = kid_id,
         current_trip = current_trip,
         origin = origin,
         destination = destination,

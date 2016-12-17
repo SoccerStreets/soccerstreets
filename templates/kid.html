@@ -17,9 +17,9 @@
                 <img src="/static/img/{{kid_image}}" alt="" />
             </div>
         </div>
-        <!-- <div class="qrcode">
-            <img src="/static/img/{{parent_image}}" alt="" />
-        </div> -->
+        <div class="qrcode">
+            <img src="{{ qrcode(kid_id) }}">
+        </div>
         <div class="profile well">
             <div class="profile-summary">
                 <div class="name">
